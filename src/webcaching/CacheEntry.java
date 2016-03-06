@@ -2,12 +2,22 @@
 package webcaching;
 
 public class CacheEntry {
-        int pageNumber;
-        boolean flag;
-        CacheEntry(int number, boolean flag)
+        private int pageNumber;
+        private boolean isValid;
+        public CacheEntry(int number)
         {
             this.pageNumber=number;
-            this.flag=flag;
         }
-    
+
+	public int getPageNumber(){
+		return this.pageNumber;
+	}
+    	
+	public boolean getIsPageValid(){
+		return this.isValid;
+	}
+	
+	public boolean setIsPageValid(boolean isValid){
+		this.isValid = isValid;
+	}
 }

@@ -7,22 +7,12 @@ public class Webcache
 {   
     int hitCount=0;
     
-    LinkedList<CacheEntry> list=new LinkedList<CacheEntry>();
+    private LinkedList<CacheEntry> list;
     private static Webcache instance=null;
     
     private Webcache()
     {
-        CacheEntry c1=new CacheEntry(1,true);
-        CacheEntry c2=new CacheEntry(2,true);
-        CacheEntry c3=new CacheEntry(3,true);
-        CacheEntry c4=new CacheEntry(4,false);
-        CacheEntry c5=new CacheEntry(5,true);
-        
-        list.add(c1);
-        list.add(c2);
-        list.add(c3);
-        list.add(c4);
-        list.add(c5);
+        this.list = new LinkedList<CacheEntry>()
     }
     public static Webcache getInstance()
     {
@@ -33,7 +23,7 @@ public class Webcache
       return instance;
     }
     
-    public void get()
+    public void get(int pageId)
     {
         if(cache!=full&&page=!found)
             send the requested page to server and update the cache while receiving it from cache ;
@@ -46,13 +36,13 @@ public class Webcache
         else
             put();
     }
-    public void put()
+    public void put(CacheEntry e)
     {
         send the request to the server && meanwhile clear the cache entry-->delete();
         update cache and serve it to client;
             
     }
-    public void delete()
+    public void delete(CacheEntry e)
     {
         based on cache algorithm like LRU delete entry in cache;
     }

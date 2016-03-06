@@ -31,7 +31,7 @@ clientId=new int[numberOfClients];
        page=rand.nextInt(20);
        return page;
    }
-   int sendRequestPage(int page)
+   int sendPageRequest(int page)
    {
        return 0;
    }
