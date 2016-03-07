@@ -5,14 +5,12 @@ import java.io.*;
 
 public class Webcache 
 {   
-    int hitCount=0;
-    
     private LinkedList<CacheEntry> list;
     private static Webcache instance=null;
     
     private Webcache()
     {
-        this.list = new LinkedList<CacheEntry>()
+        this.list = new LinkedList<CacheEntry>();
     }
     public static Webcache getInstance()
     {
@@ -30,7 +28,6 @@ public class Webcache
             
         if(page==found)
         {
-            hitCount++;
             serve the page to client;
         }
         else
@@ -41,6 +38,11 @@ public class Webcache
         send the request to the server && meanwhile clear the cache entry-->delete();
         update cache and serve it to client;
             
+    }
+    public boolean checkPage(int pageId)
+    {
+        boolean value;
+        return value;
     }
     public void delete(CacheEntry e)
     {

@@ -5,12 +5,13 @@ import java.util.*;
 
 public class Main{
 
-    private Queue<PageRequestEvent> pageRequestEventsQueue;
+    public Queue<PageRequestEvent> pageRequestEventsQueue;
     private Client client;  
-    private Webcache wcache;
+    private Webcaching wcaching;
     public static void main(String[] args)
     {
         pageRequestEventsQueue = new Queue<PageRequestEvent>();
 	client = new Client(pageRequestEventsQueue);
+        wcaching=new Webcaching(pageRequestEventsQueue.remove());
     }
 }

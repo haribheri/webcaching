@@ -1,6 +1,6 @@
-
 package webcaching;
 
+import java.lang.*;
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -8,31 +8,29 @@ import java.util.*;
 public class Client {
  
     int numberOfPages ,i;
-    public Client(PageRequestEvent pageRequestEventsQueue)
-{
-    
-}
-Scanner sc=new Scanner(System.in);
-
-
-System.out.println("enter number of pages");
-numberOfPages=sc.nextInt();
-
-
-
-}	
-   int generatePage()
+    public Client()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("enter number of pages");
+        this.numberOfPages=sc.nextInt();
+    }
+   public int generatePage()
    {
-       int page;     
+       int page;
        Random rand=new Random();
-       page=rand.nextInt(20);
+       while(cond)
+       {
+       page=rand.nextInt(numberOfPages);
+       return page;
+       }
+   }
+   public int sendPageRequest()
+   {   
+       int page;
+       page=generatePage();
        return page;
    }
-   int sendPageRequest(int page)
-   {  pagerequestevent obj;
-       return 0;
-   }
-   void receiveRequestedPage()
+   public void receiveRequestedPage()
    {
        
    }
