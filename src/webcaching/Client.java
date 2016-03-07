@@ -8,11 +8,10 @@ import java.util.*;
 public class Client {
  
     int numberOfPages ,i;
-    Client()
+    public Client(PageRequestEvent pageRequestEventsQueue)
 {
- 
- int pages[];
-
+    
+}
 Scanner sc=new Scanner(System.in);
 
 
@@ -30,7 +29,7 @@ numberOfPages=sc.nextInt();
        return page;
    }
    int sendPageRequest(int page)
-   {
+   {  pagerequestevent obj;
        return 0;
    }
    void receiveRequestedPage()
