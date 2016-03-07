@@ -35,7 +35,7 @@ public class Webcache
     }
     public void put(CacheEntry e)
     {
-        send the request to the server && meanwhile clear the cache entry-->delete();
+       send the request to the server && meanwhile clear the cache entry-->delete();
         update cache and serve it to client;
             
     }

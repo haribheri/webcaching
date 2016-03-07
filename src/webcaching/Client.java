@@ -8,9 +8,10 @@ import java.util.*;
 public class Client {
  
     int numberOfPages ,i;
-    PageRequestEvent pageRequestEvent;
-    public Client(PageRequestEvent pageRequestEvent)
+    Queue pageRequestEvent;
+    public Client(Queue pageRequestEvent)
     {
+        this.pageRequestEvent=pageRequestEvent;
         Scanner sc=new Scanner(System.in);
         System.out.println("enter number of pages");
         this.numberOfPages=sc.nextInt();
