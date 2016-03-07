@@ -11,6 +11,7 @@ public class Main{
     public static void main(String[] args)
     {
         pageRequestEventsQueue = new Queue<PageRequestEvent>();
+        //pageRequestEventsQueue.add(client.sendPageRequest());
 	client = new Client(pageRequestEventsQueue);
         wcaching=new Webcaching(pageRequestEventsQueue.remove());
     }

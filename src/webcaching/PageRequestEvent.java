@@ -7,10 +7,10 @@ public class PageRequestEvent
 {
     Client client;
     int page;
-    public int PageRequestEvent()
+    public void PageRequestEvent()
     {
         this.page=client.sendPageRequest();
-        return page;
+        //return page;
     }
     
 }
