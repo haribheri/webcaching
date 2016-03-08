@@ -5,11 +5,14 @@ import java.util.*;
 
 public class Webcaching {
     int hitCount=0, missCount=0,page;
-    PageRequestEvent pageRequestEvent;
     Webcache webcache;
-   public Webcaching(PageRequestEvent pageRequestEvent)
+    Queue pageRequestEventQueue;
+    PageRequestEvent pageRequestEvent;
+   public Webcaching(Queue pageRequestEventQueue)
    {
-       this.page=pageRequestEvent.PageRequestEvent();
+       this.pageRequestEventQueue=pageRequestEventQueue;
+       this.pageRequestEvent=pageRequestEventQueue.remove();
+       
    }
    public void checkPage()
    {

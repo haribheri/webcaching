@@ -13,6 +13,6 @@ public class Main{
         pageRequestEventsQueue = new Queue<PageRequestEvent>();
         //pageRequestEventsQueue.add(client.sendPageRequest());
 	client = new Client(pageRequestEventsQueue);
-        wcaching=new Webcaching(pageRequestEventsQueue.remove());
+        wcaching=new Webcaching(pageRequestEventsQueue);
     }
 }
