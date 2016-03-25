@@ -6,13 +6,20 @@ import java.util.*;
 public class Main{
 
     public Queue<PageRequestEvent> pageRequestEventsQueue;
-    private Client client;  
-    private Webcaching wcaching;
+    private Webcaching webcaching;
+    PageRequestEvent pageRequestEvent;
+    public Main()
+    {
+        pageRequestEventsQueue = new LinkedList<PageRequestEvent>();
+        pageRequestEvent
+        pageRequestEventsQueue.add(pageRequestEvent);
+        
+	//client = new Client(pageRequestEventsQueue);
+        //wcaching=new Webcaching(pageRequestEventsQueue);
+    
+    }
     public static void main(String[] args)
     {
-        pageRequestEventsQueue = new Queue<PageRequestEvent>();
-        //pageRequestEventsQueue.add(client.sendPageRequest());
-	client = new Client(pageRequestEventsQueue);
-        wcaching=new Webcaching(pageRequestEventsQueue);
+        Main main=new Main();
     }
 }
