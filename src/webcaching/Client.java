@@ -1,6 +1,5 @@
 package webcaching;
 
-import java.lang.*;
 import java.io.*;
 import java.awt.*;
 import java.util.*;
@@ -19,10 +18,12 @@ public class Client {
    public int generatePage()
    {
        int page;
+       int i=100;
        Random rand=new Random();
-       while(cond)
+       while(i!=0)
        {
        page=rand.nextInt(numberOfPages);
+       i--;
        }
        return page;
    }
