@@ -1,16 +1,11 @@
 package webcaching;
 
-import java.io.*;
-import java.util.*;
-
 public class PageRequestEvent
 {
-    Client client;
     int page;
-    public void PageRequestEvent()
+    public PageRequestEvent(int page)
     {
-        this.page=client.sendPageRequest();
-        //return page;
+        this.page=page;
     }
     
 }
