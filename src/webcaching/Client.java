@@ -6,10 +6,10 @@ public class Client {
  
     
     public int numberOfPages, i;
-    Queue pageRequestEvent;
-    public Client(Queue pageRequestEvent)
+    Queue<PageRequestEvent> pageRequestEventQueue;
+    public Client(Queue<PageRequestEvent> pageRequestEventQueue)
     {
-        this.pageRequestEvent=pageRequestEvent;
+        this.pageRequestEventQueue=pageRequestEventQueue;
         Scanner sc=new Scanner(System.in);
         System.out.println("enter number of pages");
         this.numberOfPages=sc.nextInt();
@@ -29,7 +29,6 @@ public class Client {
    {   
        int page;
        page=generatePage();
-       pageRequestEvent.add(page);
        return page;
    }
    
