@@ -23,29 +23,18 @@ public class Webcache
     
     public void get(int pageId)
     {
-        if(cache!=full&&page=!found)
-            send the requested page to server and update the cache while receiving it from cache ;
-            
-        if(page==found)
-        {
-            serve the page to client;
-        }
-        else
-            put();
+                
     }
     public void put(CacheEntry e)
     {
-       send the request to the server && meanwhile clear the cache entry-->delete();
-        update cache and serve it to client;
             
     }
     public boolean checkPage(int pageId)
     {
-        boolean value;
-        return value;
+        
     }
     public void delete(CacheEntry e)
     {
-        based on cache algorithm like LRU delete entry in cache;
+       
     }
 }

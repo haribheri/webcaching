@@ -13,13 +13,13 @@ public class Main{
     {
         int i;
         pageRequestEventsQueue = new LinkedList<PageRequestEvent>();
-                
+        client = new Client(pageRequestEventsQueue);
         for(i=0;i<client.numberOfPages;i++)
         {
         pageRequestEvent=new PageRequestEvent(client.sendPageRequest());
         pageRequestEventsQueue.add(pageRequestEvent);
         }       
-	client = new Client(pageRequestEventsQueue);
+	//client = new Client(pageRequestEventsQueue);
         webcaching=new Webcaching(pageRequestEventsQueue);
     
     }

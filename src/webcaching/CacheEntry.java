@@ -19,5 +19,6 @@ public class CacheEntry {
 	
 	public boolean setIsPageValid(boolean isValid){
 		this.isValid = isValid;
+                return isValid;
 	}
 }
