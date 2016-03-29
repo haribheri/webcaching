@@ -11,10 +11,9 @@ public class Main{
    
     public Main()
     {
-        int i;
         pageRequestEventsQueue = new LinkedList<PageRequestEvent>();
         client = new Client(pageRequestEventsQueue);
-        for(i=0;i<client.numberOfPages;i++)
+        for(int i=0;i<client.numberOfPages;i++)
         {
         pageRequestEvent=new PageRequestEvent(client.sendPageRequest());
         pageRequestEventsQueue.add(pageRequestEvent);

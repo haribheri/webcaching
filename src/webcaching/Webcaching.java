@@ -20,7 +20,7 @@ public class Webcaching
    
    public void checkPage()
    {
-       boolean value=webcache.checkPage(page);
+       /*boolean value=webcache.checkPage(page);
        if(value)
        {
            hitCount++;           
@@ -28,6 +28,6 @@ public class Webcaching
        else
        {
            missCount++;
-       }
+       }*/
    }
    }
