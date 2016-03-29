@@ -19,14 +19,16 @@ public class Webcache
         }
       return instance;
     }
-    public void checkPage(CacheEntry e)
+    public boolean checkPage(CacheEntry e)
     {
         if(list.contains(e))
         {
+            return true;
         }
         else
         {
             put(e);
+            return false;
         }
         
     }
@@ -75,7 +77,7 @@ public class Webcache
     }
     public void extendedSegmentedLru(CacheEntry e)//my approach
     {
-        
+                
     }
     public void lfu(CacheEntry e)
     {

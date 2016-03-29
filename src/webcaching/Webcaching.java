@@ -10,6 +10,7 @@ public class Webcaching
     Queue<PageRequestEvent> pageRequestEventQueue;
     PageRequestEvent pageRequestEvent;
     Webcache webcache;
+    CacheEntry e;
     
    public Webcaching(Queue<PageRequestEvent> pageRequestEventQueue)
    {
@@ -20,7 +21,7 @@ public class Webcaching
    
    public void checkPage()
    {
-       /*boolean value=webcache.checkPage(page);
+       boolean value=webcache.checkPage(e);
        if(value)
        {
            hitCount++;           
@@ -28,6 +29,6 @@ public class Webcaching
        else
        {
            missCount++;
-       }*/
+       }
    }
    }
