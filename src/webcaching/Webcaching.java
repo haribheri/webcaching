@@ -19,16 +19,18 @@ public class Webcaching
        this.page=pageRequestEvent.page;
    }
    
-   public void checkPage()
+   public int checkPage()
    {
        boolean value=webcache.checkPage(e);
        if(value)
        {
-           hitCount++;           
+           hitCount++;
+           return hitCount;
        }
        else
        {
            missCount++;
+           return missCount;
        }
    }
    }
