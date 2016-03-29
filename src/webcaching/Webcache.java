@@ -73,7 +73,7 @@ public class Webcache
     {
         
     }
-    public void extendedSegmentedLru(CacheEntry e)//my al
+    public void extendedSegmentedLru(CacheEntry e)//my approach
     {
         
     }
