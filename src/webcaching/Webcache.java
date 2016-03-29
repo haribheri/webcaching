@@ -61,7 +61,7 @@ public class Webcache
        {
            case 1: lru(e);
                break;
-           case 2: segmentedLru(e);
+           case 2: extendedSegmentedLru(e);
                break;
            case 3: lfu(e);
                break;
@@ -73,7 +73,7 @@ public class Webcache
     {
         
     }
-    public void segmentedLru(CacheEntry e)
+    public void extendedSegmentedLru(CacheEntry e)//my al
     {
         
     }
