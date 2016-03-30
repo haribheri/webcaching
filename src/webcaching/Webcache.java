@@ -57,7 +57,7 @@ public class Webcache
     }    
     public void deleteCacheEntry(CacheEntry e)
     {
-       char ch;
+       char ch=2;
        System.out.println("enter ch value");
        switch(ch)
        {
