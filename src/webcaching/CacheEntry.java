@@ -1,7 +1,8 @@
 
 package webcaching;
 
-public class CacheEntry {
+public class CacheEntry 
+{
         private int pageNumber;
         private boolean isValid;
         public CacheEntry(int number)
@@ -9,15 +10,18 @@ public class CacheEntry {
             this.pageNumber=number;
         }
 
-	public int getPageNumber(){
+	public int getPageNumber()
+        {
 		return this.pageNumber;
 	}
     	
-	public boolean getIsPageValid(){
+	public boolean getIsPageValid()
+        {
 		return this.isValid;
 	}
 	
-	public boolean setIsPageValid(boolean isValid){
+	public boolean setIsPageValid(boolean isValid)
+        {
 		this.isValid = isValid;
                 return isValid;
 	}

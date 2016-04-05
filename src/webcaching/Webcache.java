@@ -66,9 +66,7 @@ public class Webcache
            case 2: extendedSegmentedLru(e);
                break;
            case 3: lfu(e);
-               break;
-               
-           
+               break;       
        }
     }
     public void lru(CacheEntry e)
