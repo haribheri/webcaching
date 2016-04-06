@@ -7,7 +7,7 @@ public class Webcache
     private LinkedList<CacheEntry> list;
     private static Webcache instance=null;
     CacheEntry e;
-    private Webcache()
+    /*private Webcache()
     {
         this.list = new LinkedList<CacheEntry>();
     }
@@ -18,6 +18,10 @@ public class Webcache
             instance = new Webcache(); 
         }
       return instance;
+    }*/
+    public Webcache()
+    {
+        this.list=new LinkedList<CacheEntry>();
     }
     public boolean checkPage(CacheEntry e)
     {
@@ -59,26 +63,5 @@ public class Webcache
     {
        char ch=2;
        System.out.println("enter ch value");
-       switch(ch)
-       {
-           case 1: lru(e);
-               break;
-           case 2: extendedSegmentedLru(e);
-               break;
-           case 3: lfu(e);
-               break;       
-       }
-    }
-    public void lru(CacheEntry e)
-    {
-        
-    }
-    public void extendedSegmentedLru(CacheEntry e)//my approach for caching
-    {
-                
-    }
-    public void lfu(CacheEntry e)
-    {
-        
     }
 }
