@@ -11,5 +11,6 @@ public class CacheAlgorithm {
     public void LFUCache()
     {
         webcache=new Webcache();
+        
     }
 }

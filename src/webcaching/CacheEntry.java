@@ -4,6 +4,7 @@ public class CacheEntry
 {
         private int pageNumber;
         private boolean isValid;
+        private int count;
         public CacheEntry(int number)
         {
             this.pageNumber=number;
