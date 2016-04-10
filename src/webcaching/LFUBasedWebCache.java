@@ -20,9 +20,9 @@ public class LFUBasedWebCache
         else
         {
             put(o);
+            o.updateCount();
             return false;
         }
-        
     }
     public void put(LFUObject o)
     {
@@ -33,7 +33,8 @@ public class LFUBasedWebCache
         else
         {
             deleteCacheEntry(o);
-        }
+            list.add(o);
+         }
             
     }
     public boolean isCacheAvilable()
@@ -49,10 +50,7 @@ public class LFUBasedWebCache
     }    
     public void deleteCacheEntry(LFUObject o)
     {
-       if(o.count==1)
-       {
-           
-       }
+       //find cache entry with least count and lest object life time.
     }
             
 }
