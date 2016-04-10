@@ -6,8 +6,7 @@ public class LRUBasedWebcache {
     LinkedList<LRUObject> list;
     LRUBasedWebcache()
     {
-        this.list=new LinkedList<LRUObject>();
-        
+        this.list=new LinkedList<LRUObject>();        
     }
     
 }

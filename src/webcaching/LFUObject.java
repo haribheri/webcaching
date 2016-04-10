@@ -8,6 +8,7 @@ public class LFUObject {
     LFUObject(int pageId)
     {
         this.pageId=pageId;
+        this.count=0;
     }
     void updateCount()
     {
