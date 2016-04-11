@@ -14,4 +14,8 @@ public class LFUObject {
     {
         count++;
     }
+    public int getPage()
+    {
+        return pageId;
+    }
 }

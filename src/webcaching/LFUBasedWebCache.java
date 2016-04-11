@@ -1,5 +1,6 @@
 package webcaching;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class LFUBasedWebCache 
@@ -52,7 +53,8 @@ public class LFUBasedWebCache
     }    
     private void deleteCacheEntry()
     {
-       //find cache entry with least count and lest object life time.
+       Collections.sort(list, new LFUComparator());
+       list.removeLast();
     }
             
 }
