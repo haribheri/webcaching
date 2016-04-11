@@ -10,7 +10,7 @@ public class LFUBasedWebCache
         this.list=new LinkedList<LFUObject>();
         
     }
-    public boolean checkPage(LFUObject o)
+    private boolean checkPage(LFUObject o)
     {
         if(list.contains(o))
         {
@@ -24,7 +24,7 @@ public class LFUBasedWebCache
             return false;
         }
     }
-    public void put(LFUObject o)
+    private void put(LFUObject o)
     {
         if(isCacheAvilable())
         {
@@ -32,12 +32,12 @@ public class LFUBasedWebCache
         }
         else
         {
-            deleteCacheEntry(o);
+            deleteCacheEntry();
             list.add(o);
          }
             
     }
-    public boolean isCacheAvilable()
+    private boolean isCacheAvilable()
     {
         if(list.size()==100)
             return false;
@@ -46,9 +46,11 @@ public class LFUBasedWebCache
     }
     public void get(int pageId)
     {
-                
+        LFUObject o=new LFUObject(pageId);
+        
+           boolean value=checkPage(o);     
     }    
-    public void deleteCacheEntry(LFUObject o)
+    private void deleteCacheEntry()
     {
        //find cache entry with least count and lest object life time.
     }
