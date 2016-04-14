@@ -6,7 +6,7 @@ class LFUComparator implements Comparator<LFUObject>
 {
     public int compare(LFUObject o1, LFUObject o2)
     {
-        if(o1.getPage()<o2.getPage())
+        if(o1.getCount()<o2.getCount())
         {
             return 1;
          }

@@ -18,4 +18,8 @@ public class LFUObject {
     {
         return pageId;
     }
+    public int getCount()
+    {
+        return count;
+    }
 }
