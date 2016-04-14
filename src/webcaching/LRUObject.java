@@ -8,5 +8,12 @@ public class LRUObject {
     {
         this.pageId=pageId;
     }
-    
+    public int getPage()
+    {
+        return pageId;
+    }
+    public int getTime()
+    {
+        return time;
+    }
 }
