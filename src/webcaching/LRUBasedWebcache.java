@@ -1,12 +1,19 @@
 
 package webcaching;
 
-import java.util.LinkedList;
+import java.util.*;
+
 public class LRUBasedWebcache {
-    LinkedList<LRUObject> list;
+    private LinkedList<LRUObject> list;
+    private Map<Integer,LRUObject> map;
     LRUBasedWebcache()
     {
-        this.list=new LinkedList<LRUObject>();        
+        this.list=new LinkedList<LRUObject>();
+        map=new HashMap<Integer,LRUObject>();
+    }
+    public void put()
+    {
+        
     }
     
 }

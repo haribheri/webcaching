@@ -1,7 +1,6 @@
 package webcaching;
 
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 
 public class LFUBasedWebCache 
 {
@@ -55,6 +54,5 @@ public class LFUBasedWebCache
     {
        Collections.sort(list, new LFUComparator());
        list.removeLast();
-    }
-            
+    }            
 }
