@@ -2,15 +2,15 @@
 package webcaching;
 
 public class CacheAlgorithm {
-    Webcache webcache;
+   // Webcache webcache;
     public void LRUCache()
     {
-        webcache=new Webcache();
+     //   webcache=new Webcache();
         
     }
     public void LFUCache()
     {
-        webcache=new Webcache();
+       // webcache=new Webcache();
         
     }
 }

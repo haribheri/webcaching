@@ -1,4 +1,6 @@
 package webcaching;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import java.util.*;
         
@@ -14,12 +16,12 @@ public class Client
         this.numberOfPages=sc.nextInt();
     }
     
-   public int generatePage()
+   private int generatePage()
    {
        int page;
        Random rand=new Random();
        page=rand.nextInt(numberOfPages);
-      return page;
+       return page;
    }
    
    public int sendPageRequest()
@@ -27,7 +29,13 @@ public class Client
      int page;
      page=generatePage();
      return page;
-}
+   }
+   public Timestamp generateTimestamp()
+   {
+       java.util.Date date= new java.util.Date();
+       Timestamp time=new Timestamp(date.getTime());
+       return time;
+   }
    
    public void receiveRequestedPage()
    {
