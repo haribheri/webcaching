@@ -4,6 +4,7 @@ package webcaching;
 import java.util.*;
 
 public class LRUBasedWebcache {
+    TrainSet trainset;
     private LinkedList<LRUObject> list;
     private Map<Integer,LRUObject> map;
     LRUBasedWebcache()
@@ -25,14 +26,19 @@ public class LRUBasedWebcache {
         }
     }
             
-    private void put(LRUObject o)
+    public void put(LRUObject o)
     {
+        if(cacheSize()==100)
+        {
+            trainset=new TrainSet(list);
+        }
         if(isCacheAvilable())
         {
             list.add(o);
             map.put(Integer.SIZE, o);
             updateCache();
         }
+        
         else
         {
             deleteCacheEntry();
@@ -42,9 +48,13 @@ public class LRUBasedWebcache {
         }
         
     }
+    private int cacheSize()
+    {
+        return list.size();
+    }
     private boolean isCacheAvilable()
     {
-        if(list.size()==100)
+        if(list.size()==200)
             return false;
         else
             return true;
