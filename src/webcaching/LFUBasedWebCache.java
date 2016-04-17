@@ -5,22 +5,22 @@ import java.util.*;
 public class LFUBasedWebCache 
 {
     LinkedList<LFUObject> list;
+    LFUObject lfuobjecct;
     LFUBasedWebCache()
     {
         this.list=new LinkedList<LFUObject>();
-        
     }
-    private boolean checkPage(LFUObject o)
+    private boolean checkPage(int page)
     {
-        if(list.contains(o))
+        if(list.contains(lfuobjecct.pageId))
         {
-           o.updateCount();
+           lfuobjecct.updateCount();
            return true;
         }
         else
         {
-            put(o);
-            o.updateCount();
+            put(lfuobjecct);
+            lfuobjecct.updateCount();
             return false;
         }
     }
@@ -48,7 +48,7 @@ public class LFUBasedWebCache
     {
         LFUObject o=new LFUObject(pageId);
         
-           boolean value=checkPage(o);     
+           //boolean value=checkPage(o);     
     }    
     private void deleteCacheEntry()
     {

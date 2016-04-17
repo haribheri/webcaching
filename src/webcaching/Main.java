@@ -1,6 +1,5 @@
 package webcaching;
-import java.sql.Timestamp;
-import java.util.Date;
+
 
 import java.util.*;
 
@@ -17,11 +16,11 @@ public class Main{
         client = new Client(pageRequestEventsQueue);
         for(int i=0;i<client.numberOfPages;i++)
         {
-        pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.generateTimestamp());
+        pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
         pageRequestEventsQueue.add(pageRequestEvent);
+        
         }       
-	//client = new Client(pageRequestEventsQueue);
-        webcaching=new Webcaching(pageRequestEventsQueue);
+	webcaching=new Webcaching(pageRequestEventsQueue);
     
     }
     public static void main(String[] args)
