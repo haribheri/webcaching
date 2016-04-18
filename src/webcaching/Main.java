@@ -5,7 +5,6 @@ import java.util.*;
 
 public class Main extends Thread
 {
-
     public Queue<PageRequestEvent> pageRequestEventsQueue;
     Webcaching webcaching;
     PageRequestEvent pageRequestEvent;
