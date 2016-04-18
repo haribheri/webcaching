@@ -28,7 +28,7 @@ public class Webcaching
        Scanner file=null;
        try
        {
-           file=new Scanner(new FileInputStream("C:\\Users\\Srihari\\Desktop\\om.txt"));           
+           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
        }
        catch(FileNotFoundException e)
        {

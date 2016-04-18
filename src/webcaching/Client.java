@@ -1,8 +1,7 @@
 package webcaching;
 import java.sql.Timestamp;
-import java.util.Date;
-
 import java.util.*;
+import java.io.*;
         
 public class Client extends Thread
 {    
@@ -10,17 +9,25 @@ public class Client extends Thread
     Queue<PageRequestEvent> pageRequestEventQueue;
     public Client(Queue<PageRequestEvent> pageRequestEventQueue)
     {
-        this.pageRequestEventQueue=pageRequestEventQueue;
-       /* Scanner sc=new Scanner(System.in);
-        System.out.println("enter number of pages");
-        this.numberOfPages=sc.nextInt();*/
+       this.pageRequestEventQueue=pageRequestEventQueue;
+       Scanner file=null;
+       try
+       {
+           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
+       }
+       catch(FileNotFoundException e)
+       {
+           System.out.println("unable to locate file");
+           System.exit(0);      
+       }
+       this.numberOfPages=file.nextInt();
     }
     
    private int generatePage()
    {
        int page;
        Random rand=new Random();
-       page=rand.nextInt(numberOfPages);
+       page=rand.nextInt(100);
        return page;
     }
    
