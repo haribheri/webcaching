@@ -2,7 +2,6 @@ package webcaching;
 
 import java.util.*;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.io.*;
 public class Webcaching 
 {
@@ -23,7 +22,7 @@ public class Webcaching
        this.time=pageRequestEvent.time;
    }
    
-   public int checkPage()
+   public int checkPageInCache()
    {
        Scanner file=null;
        try
@@ -39,6 +38,7 @@ public class Webcaching
        switch(ch)
        {
            case 1:
+               boolean value=lfu.checkPage(page,time);
               
                
        }

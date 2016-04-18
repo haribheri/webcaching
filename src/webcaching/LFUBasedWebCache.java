@@ -1,6 +1,7 @@
 package webcaching;
 
 import java.util.*;
+import java.sql.Timestamp;
 
 public class LFUBasedWebCache 
 {
@@ -10,7 +11,7 @@ public class LFUBasedWebCache
     {
         this.list=new LinkedList<LFUObject>();
     }
-    private boolean checkPage(int page)
+    public boolean checkPage(int page, Timestamp time)
     {
         if(list.contains(lfuobjecct.pageId))
         {
