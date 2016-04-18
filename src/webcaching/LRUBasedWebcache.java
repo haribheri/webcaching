@@ -2,15 +2,23 @@
 package webcaching;
 
 import java.util.*;
+import java.sql.Timestamp;
 
 public class LRUBasedWebcache {
     TrainSet trainset;
     private LinkedList<LRUObject> list;
     private Map<Integer,LRUObject> map;
+    
     LRUBasedWebcache()
     {
         this.list=new LinkedList<LRUObject>();
         map=new HashMap<Integer,LRUObject>();
+    }
+    public boolean get(int page,Timestamp time)
+    {
+        LRUObject o=new LRUObject(page,time);
+        boolean value=checkPage(o);
+        return value;
     }
     public boolean checkPage(LRUObject o)
     {

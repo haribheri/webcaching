@@ -38,10 +38,29 @@ public class Webcaching
        switch(ch)
        {
            case 1:
-               boolean value=lfu.checkPage(page,time);
-              
+               boolean lfuvalue=lfu.get(page, time);
+               if(lfuvalue)
+               {
+                   hitCountOfLfu++;
+               }                   
+               else
+               {
+                   missCountOfLfu++;
+               }
+           break;
                
-       }
+           case 2:
+               boolean lruvalue=lru.get(page, time);
+               if(lruvalue)
+               {
+                   hitCountOfLru++;
+               }
+               else
+               {
+                    missCountOfLru++;
+               }
+           break;              
+        }
        return 0;
    }
    }
