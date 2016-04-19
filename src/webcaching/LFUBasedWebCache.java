@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class LFUBasedWebCache 
 {
     LinkedList<LFUObject> list;
-    LFUObject lfuobjecct;
+    
     LFUBasedWebCache()
     {
         this.list=new LinkedList<LFUObject>();
@@ -15,13 +15,13 @@ public class LFUBasedWebCache
     {
         if(list.contains(o.pageId))
         {
-           lfuobjecct.updateCount();
+           o.updateCount();
            return true;
         }
         else
         {
-            put(lfuobjecct);
-            lfuobjecct.updateCount();
+            put(o);
+            o.updateCount();
             return false;
         }
     }
@@ -29,12 +29,20 @@ public class LFUBasedWebCache
     {
         if(isCacheAvilable())
         {
+            java.util.Date date= new java.util.Date();
+            Timestamp t=new Timestamp(date.getTime());
+            o.time=t;
             list.add(o);
+            o.updateCount();
         }
         else
         {
             deleteCacheEntry();
+            java.util.Date date= new java.util.Date();
+            Timestamp t=new Timestamp(date.getTime());
+            o.time=t;
             list.add(o);
+            o.updateCount();
          }
             
     }
@@ -56,5 +64,9 @@ public class LFUBasedWebCache
     {
        Collections.sort(list, new LFUComparator());
        list.removeLast();
-    }            
+    }
+    private void updataCacheBasedOnLifeTime()
+    {
+        
+    }
 }
