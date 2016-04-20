@@ -51,6 +51,6 @@ public class Client extends Thread
    
    public void receiveRequestedPage()
    {
-       
+       System.out.println("reccieved succesfully");       
    }
 }
