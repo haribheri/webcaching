@@ -14,6 +14,7 @@ public class LFUBasedWebCache
     
     public boolean checkPage(int pageId, Timestamp time)
     {
+        updataCacheBasedOnObjectTime();
         int flag=0;
         LFUObject o=new LFUObject(pageId,time) ;
         Iterator<LFUObject> itr=list.iterator();
@@ -70,8 +71,17 @@ public class LFUBasedWebCache
        Collections.sort(list, new LFUComparator());
        list.removeLast();
     }
-    private void updataCacheBasedOnLifeTime()
+    private void updataCacheBasedOnObjectTime()
     {
-        
+        java.util.Date date= new java.util.Date();
+        Timestamp currentTime=new Timestamp(date.getTime());
+        Iterator<LFUObject> itr=list.iterator();
+        while(itr.hasNext())
+        {
+            if(itr.next().time==currentTime)
+            {
+                list.remove(itr.next());
+            }
+        }
     }
 }
