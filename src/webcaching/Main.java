@@ -26,13 +26,13 @@ public class Main extends Thread
        }
        this.numberOfClients=file.nextInt();
        pageRequestEventsQueue = new LinkedList<PageRequestEvent>();  
-       webcaching=new Webcaching(pageRequestEventsQueue);
+       
     }
     @Override
     public void run()
     {
            client = new Client(pageRequestEventsQueue);           
-           for(int j=0;j<client.numberOfPages;j++)
+           for(int i=0;i<client.numberOfPages;i++)
            {
             pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
             pageRequestEventsQueue.add(pageRequestEvent);   
@@ -44,7 +44,8 @@ public class Main extends Thread
             {
                 
             }
-        }  
+        }
+           webcaching=new Webcaching(pageRequestEventsQueue);
        
     }
     

@@ -11,6 +11,13 @@ public class LFUBasedWebCache
     {
         this.list=new LinkedList<LFUObject>();
     }
+    public boolean get(int pageId,Timestamp time)
+    {
+        LFUObject o=new LFUObject(pageId,time);
+        
+        boolean value=checkPage(o);
+        return value;
+    }
     private boolean checkPage(LFUObject o)
     {
         if(list.contains(o.pageId))
@@ -53,13 +60,7 @@ public class LFUBasedWebCache
         else
             return true;
     }
-    public boolean get(int pageId,Timestamp time)
-    {
-        LFUObject o=new LFUObject(pageId,time);
         
-        boolean value=checkPage(o);
-        return value;
-    }    
     private void deleteCacheEntry()
     {
        Collections.sort(list, new LFUComparator());

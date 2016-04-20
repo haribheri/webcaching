@@ -47,6 +47,7 @@ public class Webcaching
                {
                    missCountOfLfu++;
                }
+               
            break;
                
            case 2:
