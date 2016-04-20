@@ -3,7 +3,7 @@ import java.sql.Timestamp;
 import java.util.*;
 import java.io.*;
         
-public class Client extends Thread
+public class Client
 {    
     public int numberOfPages, i;
     Queue<PageRequestEvent> pageRequestEventQueue;
