@@ -11,26 +11,35 @@ public class LFUBasedWebCache
     {
         this.list=new LinkedList<LFUObject>();
     }
-    public boolean get(int pageId,Timestamp time)
+    
+    public boolean checkPage(int pageId, Timestamp time)
     {
-        LFUObject o=new LFUObject(pageId,time);
-        
-        boolean value=checkPage(o);
-        return value;
-    }
-    private boolean checkPage(LFUObject o)
-    {
-        if(list.contains(o.pageId))
+        int flag=0;
+        LFUObject o=new LFUObject(pageId,time) ;
+        Iterator<LFUObject> itr=list.iterator();
+        while(itr.hasNext())
         {
-           o.updateCount();
-           return true;
+            if(o.pageId==itr.next().pageId)
+            {
+               itr.next().count++;
+                flag=1;
+                break;
+            }
         }
+        /*{
+                put(o);
+                o.updateCount();
+                return false;
+         }*/
+        if(flag==1)
+        {
+            return true;
+        }          
         else
         {
             put(o);
-            o.updateCount();
             return false;
-        }
+        }        
     }
     private void put(LFUObject o)
     {

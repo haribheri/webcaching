@@ -38,7 +38,7 @@ public class Webcaching
        switch(ch)
        {
            case 1:
-               boolean lfuvalue=lfu.get(page, time);
+               boolean lfuvalue=lfu.checkPage(page, time);
                if(lfuvalue)
                {
                    hitCountOfLfu++;
