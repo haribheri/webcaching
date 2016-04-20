@@ -1,6 +1,5 @@
 package webcaching;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -39,7 +38,7 @@ public class Main extends Thread
             pageRequestEventsQueue.add(pageRequestEvent);   
             try
             {
-            Thread.sleep(500);
+            Thread.sleep(5000);
             }
             catch(InterruptedException e)
             {
@@ -51,7 +50,25 @@ public class Main extends Thread
     
     public static void main(String[] args)
     {
-        Main main=new Main();
-        main.start();
+        Main client1=new Main();
+        Main client2=new Main();
+        Main client3=new Main();
+        Main client4=new Main();
+        Main client5=new Main();
+        Main client6=new Main();
+        Main client7=new Main();
+        Main client8=new Main();
+        Main client9=new Main();
+        Main client10=new Main();
+        client1.start();
+        client2.start();
+        client3.start();
+        client4.start();
+        client5.start();
+        client6.start();
+        client7.start();
+        client8.start();
+        client9.start();
+        client10.start();
     }
 }
