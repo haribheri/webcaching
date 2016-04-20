@@ -14,17 +14,13 @@ public class LRUBasedWebcache {
         this.list=new LinkedList<LRUObject>();
         map=new HashMap<Integer,LRUObject>();
     }
-    public boolean get(int page,Timestamp time)
+   
+    public boolean checkPage(int page,Timestamp time)
     {
         LRUObject o=new LRUObject(page,time);
-        boolean value=checkPage(o);
-        return value;
-    }
-    public boolean checkPage(LRUObject o)
-    {
-        if(map.containsKey(o))
+        if(map.containsKey(o.pageId))
         {
-            updateCache();
+            updateCache(o);
             return true;
         }
         else
@@ -36,29 +32,24 @@ public class LRUBasedWebcache {
             
     public void put(LRUObject o)
     {
-        if(cacheSize()==100)
+        if(cacheSize()==100) // for prefetching
         {
             trainset=new TrainSet(list);
         }
         if(isCacheAvilable())
         {
             list.add(o);
-            map.put(Integer.SIZE, o);
-            updateCache();
+            map.put(o.pageId, o);
+            updateCache(o);
         }
         
         else
         {
             deleteCacheEntry();
             list.add(o);
-            map.put(Integer.SIZE, o);
-            
+            map.put(o.pageId,o);
         }
         
-    }
-    private int cacheSize()
-    {
-        return list.size();
     }
     private boolean isCacheAvilable()
     {
@@ -67,12 +58,18 @@ public class LRUBasedWebcache {
         else
             return true;
     }
-    private void updateCache()
-    {
-        
-    }
+    
     private void deleteCacheEntry()
     {
-        
+        list.removeLast();
+        map.remove(list.getLast().pageId);
+    }
+    private void updateCache(LRUObject o)
+    {
+        list.addFirst(o);
+    }
+    private int cacheSize()
+    {
+        return list.size();
     }
 }

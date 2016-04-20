@@ -51,7 +51,7 @@ public class Webcaching
            break;
                
            case 2:
-               boolean lruvalue=lru.get(page, time);
+               boolean lruvalue=lru.checkPage(page, time);
                if(lruvalue)
                {
                    hitCountOfLru++;
