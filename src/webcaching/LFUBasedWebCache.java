@@ -26,11 +26,6 @@ public class LFUBasedWebCache
                 break;
             }
         }
-        /*{
-                put(o);
-                o.updateCount();
-                return false;
-         }*/
         if(flag==1)
         {
             return true;
