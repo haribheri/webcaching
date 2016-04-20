@@ -27,14 +27,34 @@ public class Main extends Thread
        }
        this.numberOfClients=file.nextInt();
        pageRequestEventsQueue = new LinkedList<PageRequestEvent>();
-       client = new Client(pageRequestEventsQueue);
-        
-        for(int i=0;i<client.numberOfPages;i++)
-        {
+       
+      
+           client = new Client(pageRequestEventsQueue);           
+           for(int j=0;j<client.numberOfPages;j++)
+           {
             pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
             pageRequestEventsQueue.add(pageRequestEvent);            
-        }
+        }  
         webcaching=new Webcaching(pageRequestEventsQueue);
+    }
+    @Override
+    public void run()
+    {
+           client = new Client(pageRequestEventsQueue);           
+           for(int j=0;j<client.numberOfPages;j++)
+           {
+            pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
+            pageRequestEventsQueue.add(pageRequestEvent);   
+            try
+            {
+            Thread.sleep(500);
+            }
+            catch(InterruptedException e)
+            {
+                
+            }
+        }  
+       
     }
     
     public static void main(String[] args)
