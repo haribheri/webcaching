@@ -5,7 +5,7 @@ import java.util.*;
 import java.sql.Timestamp;
 
 public class LRUBasedWebcache {
-    TrainSet trainset;
+    
     private LinkedList<LRUObject> list;
     private Map<Integer,LRUObject> map;
     
@@ -34,7 +34,7 @@ public class LRUBasedWebcache {
     {
         if(cacheSize()==100) // for prefetching
         {
-            trainset=new TrainSet(list);
+            
         }
         if(isCacheAvilable())
         {

@@ -13,7 +13,8 @@ public class TrainSet
         this.list=list;
         this.a=new int[100];        
     }
-    public void fun()
+    
+    public void costructTrainSet()
     {        
         int i=0;
         Iterator<LRUObject> itr=list.iterator();
