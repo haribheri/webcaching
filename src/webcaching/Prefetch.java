@@ -8,7 +8,7 @@ public class Prefetch
 {
     Prediction predict;
     TrainSet trainset;
-   
+       
     public Prefetch( LinkedList<LRUObject> list, Map<Integer,LRUObject> map, int currentPage)
     {
         int nextPage;
