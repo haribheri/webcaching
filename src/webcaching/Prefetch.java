@@ -14,7 +14,7 @@ public class Prefetch
     {
         this.list=list;
         this.map=map;
-        if(list.size()==20)
+        if(list.size()>=20)
         trainset=new TrainSet(list);
     }
     public void fetchAndStoreNextPage(int currentPage)

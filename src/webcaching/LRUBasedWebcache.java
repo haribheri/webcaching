@@ -13,6 +13,7 @@ public class LRUBasedWebcache {
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
+        if(list.size()>=20)
         prefetch=new Prefetch(list,map);
     }
    
@@ -20,7 +21,7 @@ public class LRUBasedWebcache {
     {
         LRUObject o=new LRUObject(page,time);
         
-        if(list.size()==20)
+        if(list.size()>=20)
         prefetch.fetchAndStoreNextPage(page);
         
         if(map.containsKey(o.pageId))

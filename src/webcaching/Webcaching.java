@@ -20,6 +20,8 @@ public class Webcaching
        this.pageRequestEvent=pageRequestEventQueue.remove();
        this.page=pageRequestEvent.page;
        this.time=pageRequestEvent.time;
+       this.lru=new LRUBasedWebcache();
+       this.lfu=new LFUBasedWebCache();
    }
    public int checkPageInLRUCache()
    {
