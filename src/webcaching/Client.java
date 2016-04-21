@@ -27,7 +27,7 @@ public class Client
    {
        int page;
        Random rand=new Random();
-       page=rand.nextInt(100);
+       page=rand.nextInt(60);
        return page;
     }
    
