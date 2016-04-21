@@ -53,15 +53,25 @@ public class Main extends Thread
         Main client8=new Main();
         Main client9=new Main();
         Main client10=new Main();
+        client1.setName("client-1");
         client1.start();
+        client2.setName("client-2");
         client2.start();
+        client3.setName("client-3");
         client3.start();
+        client4.setName("client-1");
         client4.start();
+        client5.setName("client-5");
         client5.start();
+        client6.setName("client-6");
         client6.start();
+        client7.setName("client-7");
         client7.start();
+        client8.setName("client-8");
         client8.start();
+        client9.setName("client-9");
         client9.start();
+        client10.setName("client-10");
         client10.start();
         
     }
