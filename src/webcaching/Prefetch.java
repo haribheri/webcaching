@@ -8,11 +8,17 @@ public class Prefetch
 {
     Prediction predict;
     TrainSet trainset;
-       
-    public Prefetch( LinkedList<LRUObject> list, Map<Integer,LRUObject> map, int currentPage)
+    LinkedList<LRUObject> list;
+    Map<Integer,LRUObject> map;
+    public Prefetch( LinkedList<LRUObject> list, Map<Integer,LRUObject> map)
+    {
+        this.list=list;
+        this.map=map;
+        trainset=new TrainSet(list);
+    }
+    public void fetchAndStoreNextPage(int currentPage)
     {
         int nextPage;
-        trainset=new TrainSet(list);
         nextPage=predict.predict(currentPage);
         java.util.Date date= new java.util.Date();
         Timestamp time=new Timestamp(date.getTime());
