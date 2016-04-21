@@ -29,7 +29,7 @@ public class Main extends Thread
             }
             catch(InterruptedException e)
             {
-                
+                System.out.println(e);
             }
         }
         webcaching=new Webcaching(pageRequestEventsQueue);
