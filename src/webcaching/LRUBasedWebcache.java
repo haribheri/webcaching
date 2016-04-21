@@ -1,4 +1,3 @@
-
 package webcaching;
 
 import java.util.*;
@@ -6,13 +5,14 @@ import java.sql.Timestamp;
 
 public class LRUBasedWebcache {
     
-    private LinkedList<LRUObject> list;
-    private Map<Integer,LRUObject> map;
+    public LinkedList<LRUObject> list;
+    public Map<Integer,LRUObject> map;
+    Prefetch prefetch;
     
     LRUBasedWebcache()
     {
         this.list=new LinkedList<LRUObject>();
-        map=new HashMap<Integer,LRUObject>();
+        this.map=new HashMap<Integer,LRUObject>();
     }
    
     public boolean checkPage(int page,Timestamp time)
