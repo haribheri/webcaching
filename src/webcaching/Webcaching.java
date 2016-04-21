@@ -21,38 +21,10 @@ public class Webcaching
        this.page=pageRequestEvent.page;
        this.time=pageRequestEvent.time;
    }
-   
-   public int checkPageInCache()
+   public int checkPageInLRUCache()
    {
-       Scanner file=null;
-       try
-       {
-           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
-       }
-       catch(FileNotFoundException e)
-       {
-           System.out.println("unable to locate file");
-           System.exit(0);      
-       }
-       int ch=file.nextInt();      
-       switch(ch)
-       {
-           case 1:
-               boolean lfuvalue=lfu.checkPage(page, time);
-               if(lfuvalue)
-               {
-                   hitCountOfLfu++;
-               }                   
-               else
-               {
-                   missCountOfLfu++;
-               }
-               
-           break;
-               
-           case 2:
-               boolean lruvalue=lru.checkPage(page, time);
-               if(lruvalue)
+       boolean lruvalue=lru.checkPage(page, time);
+       if(lruvalue)
                {
                    hitCountOfLru++;
                }
@@ -60,8 +32,19 @@ public class Webcaching
                {
                     missCountOfLru++;
                }
-           break;              
-        }
-       return 0;
+       return hitCountOfLru;
    }
+   public int checkPageInLFUCache()
+   {
+       boolean lfuvalue=lfu.checkPage(page, time);
+       if(lfuvalue)
+               {
+                   hitCountOfLfu++;
+               }
+               else
+               {
+                    missCountOfLfu++;
+               }
+       return hitCountOfLfu;
    }
+}

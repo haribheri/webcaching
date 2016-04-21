@@ -33,10 +33,15 @@ public class Main extends Thread
             }
         }
         webcaching=new Webcaching(pageRequestEventsQueue);
-       
     }
-    
-    public static void main(String[] args)
+    public void result()
+    {
+        int hitCountOfLRU=webcaching.checkPageInLRUCache();
+        int hitCountOfLFU=webcaching.checkPageInLFUCache();
+        System.out.println("hit ratio through LRU is : "+hitCountOfLRU);
+        System.out.println("hit ratio through LFU is : "+hitCountOfLFU);
+    }
+    private void initClient()
     {
         Main client1=new Main();
         Main client2=new Main();
@@ -58,5 +63,13 @@ public class Main extends Thread
         client8.start();
         client9.start();
         client10.start();
+        
+    }
+    
+    public static void main(String[] args)
+    {
+        Main main=new Main();
+        main.initClient();
+        main.result();
     }
 }
