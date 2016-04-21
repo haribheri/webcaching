@@ -25,7 +25,7 @@ public class Main extends Thread
             pageRequestEventsQueue.add(pageRequestEvent);   
             try
             {
-            Thread.sleep(5000);
+            Thread.sleep(500);
             }
             catch(InterruptedException e)
             {
@@ -70,6 +70,13 @@ public class Main extends Thread
     {
         Main main=new Main();
         main.initClient();
-        main.result();
+        try
+        {
+            main.result();            
+        }catch(NullPointerException e)
+        {
+            
+        }
+        
     }
 }
