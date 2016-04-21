@@ -18,7 +18,7 @@ public class LRUBasedWebcache {
     public boolean checkPage(int page,Timestamp time)
     {
         LRUObject o=new LRUObject(page,time);
-        prefetch.
+        
         if(map.containsKey(o.pageId))
         {
             updateCache(o);
