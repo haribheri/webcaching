@@ -32,10 +32,6 @@ public class LRUBasedWebcache {
     
     public void put(LRUObject o)
     {
-        if(cacheSize()==100) // for prefetching
-        {
-            
-        }
         if(isCacheAvilable())
         {
             list.add(o);
