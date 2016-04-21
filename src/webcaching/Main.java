@@ -10,21 +10,9 @@ public class Main extends Thread
     Webcaching webcaching;
     PageRequestEvent pageRequestEvent;
     Client client;
-    int numberOfClients;
-   
+       
     public Main()
     {
-       Scanner file=null;
-       try
-       {
-           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
-       }
-       catch(FileNotFoundException e)
-       {
-           System.out.println("unable to locate file");
-           System.exit(0);      
-       }
-       this.numberOfClients=file.nextInt();
        pageRequestEventsQueue = new LinkedList<PageRequestEvent>();  
        
     }
