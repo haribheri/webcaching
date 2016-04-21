@@ -44,7 +44,7 @@ public class Main extends Thread
     private void initClient()
     {
         Main client1=new Main();
-        Main client2=new Main();
+        /*Main client2=new Main();
         Main client3=new Main();
         Main client4=new Main();
         Main client5=new Main();
@@ -53,9 +53,9 @@ public class Main extends Thread
         Main client8=new Main();
         Main client9=new Main();
         Main client10=new Main();
-        client1.setName("client-1");
+        */client1.setName("client-1");
         client1.start();
-        client2.setName("client-2");
+        /*client2.setName("client-2");
         client2.start();
         client3.setName("client-3");
         client3.start();
@@ -73,19 +73,18 @@ public class Main extends Thread
         client9.start();
         client10.setName("client-10");
         client10.start();
-        
+        */
     }
     
     public static void main(String[] args)
     {
         Main main=new Main();
-        main.initClient();
-        try
-        {
+        try{
+            main.initClient();
             main.result();            
-        }catch(NullPointerException e)
-        {
-            
+           }catch(NullPointerException e)
+            {
+            System.out.println(e);
         }
         
     }
