@@ -11,17 +11,19 @@ public class TrainSet
     public TrainSet(LinkedList<LRUObject> list)
     {
         this.list=list;
-        this.a=new int[100];        
+        this.a=new int[10];        
+        costructTrainSet();
     }
     
-    public void costructTrainSet()
+    public final void costructTrainSet()
     {        
         int i=0;
         Iterator<LRUObject> itr=list.iterator();
-        while(itr.hasNext()&&i<100)
+        while(itr.hasNext()&&i<10)
         {
          a[i]=itr.next().getPage();
         }
         prediction=new Prediction(a);
+        prediction=new Prediction();
     }
 }

@@ -6,6 +6,7 @@ import java.io.*;
 public class Client
 {    
     public int numberOfPages, i;
+    public int rangeOfpages;
     Queue<PageRequestEvent> pageRequestEventQueue;
     public Client(Queue<PageRequestEvent> pageRequestEventQueue)
     {
@@ -21,13 +22,14 @@ public class Client
            System.exit(0);      
        }
        this.numberOfPages=file.nextInt();
+       this.rangeOfpages=file.nextInt();
     }
     
    private int generatePage()
    {
        int page;
        Random rand=new Random();
-       page=rand.nextInt(60);
+       page=rand.nextInt(rangeOfpages);
        return page;
     }
    
