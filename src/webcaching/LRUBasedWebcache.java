@@ -9,22 +9,22 @@ public class LRUBasedWebcache {
     
     public LinkedList<LRUObject> list;
     public Map<Integer,LRUObject> map;
-    Prefetch prefetch;
+    //Prefetch prefetch;
     int size;    
     LRUBasedWebcache()
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
-        if(list.size()>=(size/2))
-        prefetch=new Prefetch(list,map);
+        //if(list.size()>=(size/2))
+       // prefetch=new Prefetch(list,map);
     }
    
     public boolean checkPage(int page,Timestamp time)
     {
         LRUObject o=new LRUObject(page,time);
         
-        if(list.size()>=(size/2))
-        prefetch.fetchAndStoreNextPage(page);
+        //if(list.size()>=(size/2))
+        //prefetch.fetchAndStoreNextPage(page);
         
         if(map.containsKey(o.pageId))
         {
@@ -57,7 +57,7 @@ public class LRUBasedWebcache {
     }
     private boolean isCacheAvilable()
     {
-        Scanner file=null;
+        /*Scanner file=null;
        try
        {
            file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
@@ -68,7 +68,8 @@ public class LRUBasedWebcache {
            System.exit(0);      
        }
        size=file.nextInt();
-        if(list.size()==size)
+        */
+        if(list.size()>=21)
             return false;
         else
             return true;

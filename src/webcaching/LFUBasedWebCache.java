@@ -14,7 +14,7 @@ public class LFUBasedWebCache
     
     public boolean checkPage(int pageId, Timestamp time)
     {
-        updataCacheBasedOnObjectTime();
+        //updataCacheBasedOnObjectTime();
         int flag=0;                     //to check page is in cache
         LFUObject o=new LFUObject(pageId,time) ;
         Iterator<LFUObject> itr=list.iterator();
@@ -60,7 +60,7 @@ public class LFUBasedWebCache
     }
     private boolean isCacheAvilable()
     {
-        if(list.size()==100)
+        if(list.size()>=21)
             return false;
         else
             return true;

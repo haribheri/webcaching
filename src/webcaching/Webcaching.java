@@ -3,36 +3,58 @@ package webcaching;
 import java.util.*;
 import java.sql.Timestamp;
 import java.io.*;
-public class Webcaching 
+public final class Webcaching extends Thread 
 {
     int hitCountOfLru=0, missCountOfLru=0;
     int hitCountOfLfu=0, missCountOfLfu=0;
-    int page;
-    Timestamp time;
     Queue<PageRequestEvent> pageRequestEventQueue;
     PageRequestEvent pageRequestEvent;
     LFUBasedWebCache lfu;
-    //LRUBasedWebcache lru;
+    LRUBasedWebcache lru;
         
    public Webcaching(Queue<PageRequestEvent> pageRequestEventQueue)
    {
+       
+       
        this.pageRequestEventQueue=pageRequestEventQueue;
-       this.pageRequestEvent=pageRequestEventQueue.remove();
-       this.page=pageRequestEvent.page;
-       this.time=pageRequestEvent.time;
-     //  this.lru=new LRUBasedWebcache();
+       
+       this.lru=new LRUBasedWebcache();
+       
        this.lfu=new LFUBasedWebCache();
-       fun();
+       int ch;
+       System.out.println("Enter value between 1-2 :");
+       System.out.println("1 for LRU implementation");
+       System.out.println("2 for LFU implementation");
+       Scanner sc=new Scanner(System.in);
+       ch=sc.nextInt();
+       switch(ch)
+       {
+           case 1:
+               checkPageInLRUCache();
+               System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
+               break;
+           case 2:
+               checkPageInLFUCache();
+               System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
+               break;
+        }
+            
+       //printPageRequestQueue();    
    }
-   public void fun()
+     
+   public void checkPageInLRUCache()
    {
-       int value=checkPageInLFUCache();
-       System.out.println("value is "+value);
-   }
-   /*
-   public int checkPageInLRUCache()
-   {
-       boolean lruvalue=lru.checkPage(page, time);
+       
+       int page;
+       Timestamp time;
+       boolean lruvalue;
+       while(!pageRequestEventQueue.isEmpty())
+       {
+       pageRequestEvent=pageRequestEventQueue.remove();
+       page=pageRequestEvent.page;
+       time=pageRequestEvent.time;
+       
+       lruvalue=lru.checkPage(page, time);
        if(lruvalue)
                {
                    hitCountOfLru++;
@@ -41,12 +63,22 @@ public class Webcaching
                {
                     missCountOfLru++;
                }
-       return hitCountOfLru;
+        }
    }
-   */
-   public int checkPageInLFUCache()
+   
+   public void checkPageInLFUCache()
    {
-       boolean lfuvalue=lfu.checkPage(page, time);
+       int page;
+       Timestamp time;
+       boolean lfuvalue;
+       while(!pageRequestEventQueue.isEmpty())
+       {
+       pageRequestEvent=pageRequestEventQueue.remove();
+       page=pageRequestEvent.page;
+       time=pageRequestEvent.time;
+       try
+       {
+       lfuvalue=lfu.checkPage(page, time);
        if(lfuvalue)
                {
                    hitCountOfLfu++;
@@ -55,6 +87,24 @@ public class Webcaching
                {
                     missCountOfLfu++;
                }
-       return hitCountOfLfu;
+       }catch(Exception e){
+           System.out.println(e);
+       }
+       
+       }
+   }
+   
+   public void printPageRequestQueue()
+   {
+        int page;
+        Timestamp time;
+        while(!pageRequestEventQueue.isEmpty())
+        {
+            pageRequestEvent=pageRequestEventQueue.remove();
+            page=pageRequestEvent.page;
+            time=pageRequestEvent.time;
+            System.out.println("page is"+ page);
+            System.out.println("page is"+ time);
+        }
    }
 }

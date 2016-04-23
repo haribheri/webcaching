@@ -2,6 +2,7 @@ package webcaching;
 
 import java.io.*;
 import java.util.*;
+import java.sql.Timestamp;
 
 public class Main extends Thread
 {
@@ -12,18 +13,17 @@ public class Main extends Thread
        
     public Main()
     {
-       pageRequestEventsQueue = new LinkedList<PageRequestEvent>();  
-          
+       this.pageRequestEventsQueue = new LinkedList<PageRequestEvent>();  
     }
     @Override
     public void run()
     {
-           client = new Client(pageRequestEventsQueue);           
+           client = new Client(this.pageRequestEventsQueue);           
            for(int i=0;i<client.numberOfPages;i++)
            {
             pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
-            pageRequestEventsQueue.add(pageRequestEvent);   
-            try
+            this.pageRequestEventsQueue.add(pageRequestEvent);   
+           try
             {
             Thread.sleep(500);
             }
@@ -31,39 +31,37 @@ public class Main extends Thread
             {
                 System.out.println(e);
             }
-        }
-        
+        }           
     }
     public void caching()
     {
-        if(!pageRequestEventsQueue.isEmpty())
-       webcaching=new Webcaching(pageRequestEventsQueue); 
-    }
-   /* public void result()
-    {
-        int hitCountOfLRU=webcaching.checkPageInLRUCache();
-        int hitCountOfLFU=webcaching.checkPageInLFUCache();
-        System.out.println("hit ratio through LRU is : "+hitCountOfLRU);
-        System.out.println("hit ratio through LFU is : "+hitCountOfLFU);
-    }*/
-    private void initClient()
-    {
-        Main client1=new Main();
-        client1.setName("client-1");
-        client1.start();
-        
+         webcaching=new Webcaching(this.pageRequestEventsQueue); 
     }
     
+    private void initClient()
+    {
+        this.setName("client-1");
+        this.start();
+        
+    }
+    public void display()
+    {
+        for(PageRequestEvent pre : pageRequestEventsQueue)
+        {
+            System.out.println(pre.page);
+        }
+    }
+    
+    @Override
+    public String toString()
+    {
+     return "page "+ this.pageRequestEvent.page ;   
+    }
     public static void main(String[] args)
     {
         Main main=new Main();
-        try{
-            main.initClient();
-                        
-           }catch(NullPointerException e)
-            {
-            System.out.println(e);
-        }
+        main.initClient();
         main.caching();
+     
     }
 }
