@@ -12,7 +12,7 @@ public class Webcaching
     Queue<PageRequestEvent> pageRequestEventQueue;
     PageRequestEvent pageRequestEvent;
     LFUBasedWebCache lfu;
-    LRUBasedWebcache lru;
+    //LRUBasedWebcache lru;
         
    public Webcaching(Queue<PageRequestEvent> pageRequestEventQueue)
    {
@@ -20,9 +20,16 @@ public class Webcaching
        this.pageRequestEvent=pageRequestEventQueue.remove();
        this.page=pageRequestEvent.page;
        this.time=pageRequestEvent.time;
-       this.lru=new LRUBasedWebcache();
+     //  this.lru=new LRUBasedWebcache();
        this.lfu=new LFUBasedWebCache();
+       fun();
    }
+   public void fun()
+   {
+       int value=checkPageInLFUCache();
+       System.out.println("value is "+value);
+   }
+   /*
    public int checkPageInLRUCache()
    {
        boolean lruvalue=lru.checkPage(page, time);
@@ -36,6 +43,7 @@ public class Webcaching
                }
        return hitCountOfLru;
    }
+   */
    public int checkPageInLFUCache()
    {
        boolean lfuvalue=lfu.checkPage(page, time);

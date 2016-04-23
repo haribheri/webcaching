@@ -14,8 +14,8 @@ public class LFUBasedWebCache
     
     public boolean checkPage(int pageId, Timestamp time)
     {
-        //updataCacheBasedOnObjectTime();
-        int flag=0;
+        updataCacheBasedOnObjectTime();
+        int flag=0;                     //to check page is in cache
         LFUObject o=new LFUObject(pageId,time) ;
         Iterator<LFUObject> itr=list.iterator();
         while(itr.hasNext())
@@ -75,12 +75,15 @@ public class LFUBasedWebCache
     {
         java.util.Date date= new java.util.Date();
         Timestamp currentTime=new Timestamp(date.getTime());
-        long currenttime=currentTime.getTime();
+        
+        long currenttime=currentTime.getTime(); //change current time in to long
+        
         Iterator<LFUObject> itr=list.iterator();
         while(itr.hasNext())
         { 
-            long pageTime=itr.next().time.getTime();
-            if(pageTime==currenttime+120000)//pagetime > 2min delete it
+            long pageTime=itr.next().time.getTime(); //change page time into long
+            pageTime+=120000;         //2 min
+            if(currenttime>=pageTime) //pagetime > 2min delete it
             {
                 list.remove(itr.next());
             }
