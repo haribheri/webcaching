@@ -10,12 +10,24 @@ public class LRUBasedWebcache {
     public LinkedList<LRUObject> list;
     public Map<Integer,LRUObject> map;
     //Prefetch prefetch;
-    int size;    
+    int cacheSize;    
     LRUBasedWebcache()
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
-        //if(list.size()>=(size/2))
+        Scanner file=null;
+       try
+       {
+           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
+       }
+       catch(FileNotFoundException e)
+       {
+           System.out.println("unable to locate file");
+           System.exit(0);      
+       }
+       this.cacheSize=file.nextInt();
+       
+        //if(list.size()>=(cacheSize/2))
        // prefetch=new Prefetch(list,map);
     }
    
@@ -23,7 +35,7 @@ public class LRUBasedWebcache {
     {
         LRUObject o=new LRUObject(page,time);
         
-        //if(list.size()>=(size/2))
+        //if(list.size()>=(cacheSize/2))
         //prefetch.fetchAndStoreNextPage(page);
         
         if(map.containsKey(o.pageId))
@@ -57,19 +69,7 @@ public class LRUBasedWebcache {
     }
     private boolean isCacheAvilable()
     {
-        /*Scanner file=null;
-       try
-       {
-           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
-       }
-       catch(FileNotFoundException e)
-       {
-           System.out.println("unable to locate file");
-           System.exit(0);      
-       }
-       size=file.nextInt();
-        */
-        if(list.size()>=21)
+        if(list.size()>=cacheSize)
             return false;
         else
             return true;

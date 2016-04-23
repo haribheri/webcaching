@@ -1,20 +1,33 @@
 package webcaching;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.sql.Timestamp;
 
 public class LFUBasedWebCache 
 {
     LinkedList<LFUObject> list;
-    
+    int cacheSize;
     LFUBasedWebCache()
     {
-        this.list=new LinkedList<LFUObject>();
+       this.list=new LinkedList<LFUObject>();
+       Scanner file=null;
+       try
+       {
+           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
+       }
+       catch(FileNotFoundException e)
+       {
+           System.out.println("unable to locate file");
+           System.exit(0);      
+       }
+       this.cacheSize=file.nextInt();
     }
     
     public boolean checkPage(int pageId, Timestamp time)
     {
-        //updataCacheBasedOnObjectTime();
+        updataCacheBasedOnObjectTime();
         int flag=0;                     //to check page is in cache
         LFUObject o=new LFUObject(pageId,time) ;
         Iterator<LFUObject> itr=list.iterator();
@@ -60,7 +73,7 @@ public class LFUBasedWebCache
     }
     private boolean isCacheAvilable()
     {
-        if(list.size()>=21)
+        if(list.size()>=cacheSize)
             return false;
         else
             return true;
