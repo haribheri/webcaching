@@ -6,6 +6,7 @@ import java.io.*;
 public final class Webcaching extends Thread 
 {
     int hitCountOfLru=0, missCountOfLru=0;
+    int hitCountOfLrupref=0, missCountOfLrupref=0;
     int hitCountOfLfu=0, missCountOfLfu=0;
     Queue<PageRequestEvent> pageRequestEventQueue;
     PageRequestEvent pageRequestEvent;
@@ -37,6 +38,10 @@ public final class Webcaching extends Thread
                checkPageInLFUCache();
                System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
                break;
+           case 3:
+               checkPageInLRUCachewithPrefetching();
+               System.out.println("hit count while using LFU is  "+this.hitCountOfLrupref +" and \nmiss count while using LFU is "+this.missCountOfLrupref);
+               break;
         }
             
        //printPageRequestQueue();    
@@ -65,7 +70,10 @@ public final class Webcaching extends Thread
                }
         }
    }
-   
+   public void checkPageInLRUCachewithPrefetching()
+   {
+       
+   }
    public void checkPageInLFUCache()
    {
        int page;

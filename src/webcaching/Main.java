@@ -10,10 +10,21 @@ public class Main extends Thread
     Webcaching webcaching;
     PageRequestEvent pageRequestEvent;
     Client client;
-       
+    static int numberOfClients;   
     public Main()
     {
-       this.pageRequestEventsQueue = new LinkedList<PageRequestEvent>();  
+       this.pageRequestEventsQueue = new LinkedList<PageRequestEvent>(); 
+       Scanner file=null;
+       try
+       {
+           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
+       }
+       catch(FileNotFoundException e)
+       {
+           System.out.println("unable to locate file");
+           System.exit(0);      
+       }
+       this.numberOfClients=file.nextInt();
     }
     
     public void display()
@@ -58,12 +69,16 @@ public class Main extends Thread
         this.setName("name");
         this.start();  
     }
-    public static void main(String[] args)
+    public static void main(String[] args)throws InterruptedException
     {
-        Main main1=new Main();
-        main1.initClient("client-1");
-        Main main2=new Main();
-        main2.initClient("client-2");
-        main1.caching();
+        int i;
+        for(i=1;i<=numberOfClients;i++)
+        {
+            Main main=new Main();
+            main.initClient("Client -i");
+        }
+        Main obj=new Main();
+        Thread.sleep(50000);
+        obj.caching();
     }
 }

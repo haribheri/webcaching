@@ -1,36 +1,43 @@
-package webcaching;
 
+package webcaching;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.sql.Timestamp;
 
-public class LRUBasedWebcache {
-    
+
+public class LRUWebCacheWithPrefetch 
+{       
     public LinkedList<LRUObject> list;
     public Map<Integer,LRUObject> map;
+    Prefetch prefetch;
     int cacheSize;    
-    LRUBasedWebcache()
+    LRUWebCacheWithPrefetch()
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
         Scanner file=null;
-       try
-       {
+        try
+        {
            file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
-       }
-       catch(FileNotFoundException e)
-       {
+        }
+        catch(FileNotFoundException e)
+        {
            System.out.println("unable to locate file");
            System.exit(0);      
        }
-       this.cacheSize=file.nextInt(); 
+        this.cacheSize=file.nextInt(); 
     }
    
     public boolean checkPage(int page,Timestamp time)
     {
         LRUObject o=new LRUObject(page,time);
         
+       /* if(list.size()>=(cacheSize/2))
+        {
+        prefetch=new Prefetch(list,map);
+        prefetch.fetchAndStoreNextPage(page);
+        }*/
         if(map.containsKey(o.pageId))
         {
             updateCache(o);
