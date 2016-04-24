@@ -15,35 +15,7 @@ public class Main extends Thread
     {
        this.pageRequestEventsQueue = new LinkedList<PageRequestEvent>();  
     }
-    @Override
-    public void run()
-    {
-           client = new Client(this.pageRequestEventsQueue);           
-           for(int i=0;i<client.numberOfPages;i++)
-           {
-            pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
-            this.pageRequestEventsQueue.add(pageRequestEvent);   
-           try
-            {
-            Thread.sleep(500);
-            }
-            catch(InterruptedException e)
-            {
-                System.out.println(e);
-            }
-        }           
-    }
-    public void caching()
-    {
-         webcaching=new Webcaching(this.pageRequestEventsQueue); 
-    }
     
-    private void initClient()
-    {
-        this.setName("client-1");
-        this.start();
-        
-    }
     public void display()
     {
         for(PageRequestEvent pre : pageRequestEventsQueue)
@@ -57,11 +29,41 @@ public class Main extends Thread
     {
      return "page "+ this.pageRequestEvent.page ;   
     }
+    
+    public void caching()
+    {
+         webcaching=new Webcaching(this.pageRequestEventsQueue); 
+    }
+    
+    @Override
+    public void run()
+    {
+           client = new Client(this.pageRequestEventsQueue);           
+           for(int i=0;i<client.numberOfPages;i++)
+           {
+            pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
+            this.pageRequestEventsQueue.add(pageRequestEvent);   
+            try
+            {
+             Thread.sleep(5000);
+            }
+             catch(InterruptedException e)
+            {
+                System.out.println(e);
+            }
+        }           
+    }
+    private void initClient(String name)
+    {
+        this.setName("name");
+        this.start();  
+    }
     public static void main(String[] args)
     {
-        Main main=new Main();
-        main.initClient();
-        main.caching();
-     
+        Main main1=new Main();
+        main1.initClient("client-1");
+        Main main2=new Main();
+        main2.initClient("client-2");
+        main1.caching();
     }
 }

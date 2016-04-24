@@ -9,22 +9,20 @@ public class Prediction
     int [] trainset;
     int [][] arr;
     Client client;
-    public Prediction()//called by prefetch
-    {
-        int i;
-        this.rangeOfPages=client.rangeOfpages;
-        this.arr=new int[rangeOfPages][];
-        for(i=0;i<this.rangeOfPages;i++)
-            arr[i]=new int[rangeOfPages];
-        costructPredictionTable(rangeOfPages);
-        
-    }
+    
     public Prediction(int a[])//called by trainset
     {
         this.trainset=new int [10];
-        int i;
+        int i,j;
         for(i=0;i<trainset.length;i++)
             trainset[i]=a[i];
+        
+        this.rangeOfPages=client.rangeOfpages;
+        this.arr=new int[rangeOfPages][];
+        for(j=0;j<this.rangeOfPages;j++)
+            arr[j]=new int[rangeOfPages];
+        costructPredictionTable(rangeOfPages);
+
     }
     public int predict(int page)//called by prefetch
     {

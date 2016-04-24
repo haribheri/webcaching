@@ -9,7 +9,7 @@ public class LRUBasedWebcache {
     
     public LinkedList<LRUObject> list;
     public Map<Integer,LRUObject> map;
-    //Prefetch prefetch;
+    Prefetch prefetch;
     int cacheSize;    
     LRUBasedWebcache()
     {
@@ -25,19 +25,18 @@ public class LRUBasedWebcache {
            System.out.println("unable to locate file");
            System.exit(0);      
        }
-       this.cacheSize=file.nextInt();
-       
-        //if(list.size()>=(cacheSize/2))
-       // prefetch=new Prefetch(list,map);
+       this.cacheSize=file.nextInt(); 
     }
    
     public boolean checkPage(int page,Timestamp time)
     {
         LRUObject o=new LRUObject(page,time);
         
-        //if(list.size()>=(cacheSize/2))
-        //prefetch.fetchAndStoreNextPage(page);
-        
+       /* if(list.size()>=(cacheSize/2))
+        {
+        prefetch=new Prefetch(list,map);
+        prefetch.fetchAndStoreNextPage(page);
+        }*/
         if(map.containsKey(o.pageId))
         {
             updateCache(o);
