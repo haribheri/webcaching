@@ -19,8 +19,8 @@ public class Prefetch
     public void fetchAndStoreNextPage(int currentPage)
     {
         int nextPage;
-        
-        nextPage=predict.predict(currentPage);//predict class
+        nextPage=trainset.prediction.predict(currentPage); //predict class from trainset class
+       // nextPage=predict.predict(currentPage);
         java.util.Date date= new java.util.Date();
         Timestamp time=new Timestamp(date.getTime());
         LRUObject o=new LRUObject(nextPage,time);

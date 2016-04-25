@@ -71,18 +71,13 @@ public class Main extends Thread
     }
     public static void main(String[] args)throws InterruptedException
     {
-        int i;
-        for(i=1;i<=5;i++)
-        {
-            Main main=new Main();
-            main.initClient("Client -i");
-        }
-        Thread mt=Thread.currentThread();
         
-        Main obj=new Main();
-        
-        obj.join(); //waits main thread until to complete child thread 
-        obj.caching();            
+        Main main=new Main();
+                
+        main.initClient("Client-1");
+       
+        main.join(); //waits main thread until to complete child thread 
+        main.caching();            
         
         
         

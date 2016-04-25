@@ -25,6 +25,6 @@ public class TrainSet
          i++;
         }
         prediction=new Prediction(a);
-       
+               
     }
 }

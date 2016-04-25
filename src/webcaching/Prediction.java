@@ -17,7 +17,8 @@ public class Prediction
         for(i=0;i<trainset.length;i++)
             trainset[i]=a[i];
         
-        this.rangeOfPages=client.rangeOfpages;
+        //this.rangeOfPages=client.rangeOfpages;
+        this.rangeOfPages=15;
         this.arr=new int[rangeOfPages][];
         for(j=0;j<this.rangeOfPages;j++)
             arr[j]=new int[rangeOfPages];

@@ -31,6 +31,7 @@ public final class Webcaching extends Thread
        System.out.println("Enter value between 1-2 :");
        System.out.println("1 for LRU implementation");
        System.out.println("2 for LFU implementation");
+       System.out.println("3 for LFU implementation with prefetching");
        Scanner sc=new Scanner(System.in);
        ch=sc.nextInt();
        switch(ch)
@@ -45,7 +46,8 @@ public final class Webcaching extends Thread
                break;
            case 3:
                checkPageInLRUCachewithPrefetching();
-               System.out.println("hit count while using LFU is  "+this.hitCountOfLrupref +" and \nmiss count while using LFU is "+this.missCountOfLrupref);
+               checkPageInLRUCachewithPrefetching();
+               System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
                break;
         }
             
@@ -89,11 +91,11 @@ public final class Webcaching extends Thread
        lruvalue=lrupref.checkPage(page, time);
        if(lruvalue)
                {
-                   hitCountOfLru++;
+                   hitCountOfLrupref++;
                }
                else
                {
-                    missCountOfLru++;
+                   missCountOfLrupref++;
                }
         }
    }
