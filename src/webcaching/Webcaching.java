@@ -25,41 +25,29 @@ public final class Webcaching extends Thread
        
        this.lrupref=new LRUWebCacheWithPrefetch();
        
-       int ch;
-       System.out.println("Enter value between 1-3 :");
-       System.out.println("1 for LRU implementation");
-       System.out.println("2 for LFU implementation");
-       System.out.println("3 for LFU implementation with prefetching");
-       Scanner sc=new Scanner(System.in);
-       ch=sc.nextInt();
-       switch(ch)
-       {
-           case 1:
-               checkPageInLRUCache();
-               System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
-               break;
-           case 2:
-               checkPageInLFUCache();
+               printPageRequestQueue(); //print requested pages
+               
+               checkPageInLFUCache();  //LFU ALOGORITHM
                System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
-               break;
-           case 3:
-               checkPageInLRUCachewithPrefetching();
-               checkPageInLRUCachewithPrefetching();
+               
+               checkPageInLRUCache();  //LRU ALGORITHM
+               System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
+               
+               checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
                System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
-               break;
-        }
-            
-       //printPageRequestQueue();    
-   }
+    }
      
    public void checkPageInLRUCache()
    {
        int page;
        Timestamp time;
        boolean lruvalue;
-       while(!pageRequestEventQueue.isEmpty())
+       Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
+       try
        {
-       pageRequestEvent=pageRequestEventQueue.remove();
+       while(itr.hasNext())
+       {
+       pageRequestEvent=itr.next();
        page=pageRequestEvent.page;
        time=pageRequestEvent.time;
        
@@ -73,15 +61,22 @@ public final class Webcaching extends Thread
                     missCountOfLru++;
                }
         }
+       }catch(Exception e)
+       {
+           System.out.println(e);
+       }
    }
    public void checkPageInLRUCachewithPrefetching()
    {
        int page;
        Timestamp time;
        boolean lruprefvalue;
-       while(!pageRequestEventQueue.isEmpty())
+       Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
+       try
        {
-       pageRequestEvent=pageRequestEventQueue.remove();
+       while(itr.hasNext())
+       {
+       pageRequestEvent=itr.next();
        page=pageRequestEvent.page;
        time=pageRequestEvent.time;
        
@@ -93,21 +88,27 @@ public final class Webcaching extends Thread
                else
                {
                    missCountOfLrupref++;
-               }
-        }
+               } 
+       }
+       }catch(Exception e)
+       {
+           System.out.println(e);
+       }
    }
    public void checkPageInLFUCache()
    {
        int page;
        Timestamp time;
        boolean lfuvalue;
-       while(!pageRequestEventQueue.isEmpty())
-       {
-       pageRequestEvent=pageRequestEventQueue.remove();
-       page=pageRequestEvent.page;
-       time=pageRequestEvent.time;
+       Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
        try
        {
+       while(itr.hasNext())
+       {
+       pageRequestEvent=itr.next();
+       page=pageRequestEvent.page;
+       time=pageRequestEvent.time;
+       
        lfuvalue=lfu.checkPage(page, time);
        if(lfuvalue)
                {
@@ -116,11 +117,11 @@ public final class Webcaching extends Thread
                else
                {
                     missCountOfLfu++;
-               }
-       }catch(Exception e){
-           System.out.println(e);
+               }             
        }
-       
+       }catch(Exception e)
+       {
+           System.out.println(e);
        }
    }
    
@@ -128,13 +129,21 @@ public final class Webcaching extends Thread
    {
         int page;
         Timestamp time;
-        while(!pageRequestEventQueue.isEmpty())
+        Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
+        try
         {
-            pageRequestEvent=pageRequestEventQueue.remove();
+            while(itr.hasNext())
+        {
+            pageRequestEvent=itr.next();
             page=pageRequestEvent.page;
             time=pageRequestEvent.time;
-            System.out.println("page is"+ page);
-            System.out.println("page is"+ time);
+            System.out.print(page+"\t");
+            //System.out.println("page is"+ time);
         }
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        System.out.println();
    }
 }
