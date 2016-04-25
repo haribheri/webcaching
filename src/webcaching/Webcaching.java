@@ -6,14 +6,17 @@ import java.io.*;
 
 public final class Webcaching extends Thread 
 {
-    int hitCountOfLru=0, missCountOfLru=0;
-    int hitCountOfLrupref=0, missCountOfLrupref=0;
     int hitCountOfLfu=0, missCountOfLfu=0;
+    int hitCountOfLru=0, missCountOfLru=0;
+    int hitCountOfLruTime=0, missCountOfLruTime=0;
+    int hitCountOfLrupref=0, missCountOfLrupref=0;
+    
     Queue<PageRequestEvent> pageRequestEventQueue;
     PageRequestEvent pageRequestEvent;
     LFUBasedWebCache lfu;
     LRUBasedWebcache lru;
     LRUWebCacheWithPrefetch lrupref;
+    LRUWebCacheWithObjectLifeTime lrutime;
     
    public Webcaching(Queue<PageRequestEvent> pageRequestEventQueue)
    {      
@@ -23,23 +26,30 @@ public final class Webcaching extends Thread
        
        this.lfu=new LFUBasedWebCache();
        
+       this.lrutime=new LRUWebCacheWithObjectLifeTime();
+       
        this.lrupref=new LRUWebCacheWithPrefetch();
        
                printPageRequestQueue(); //print requested pages
-               
+               System.out.println();
                checkPageInLFUCache();  //LFU ALOGORITHM
                System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
                lfu.displayCache();
-               
+               System.out.println();
                checkPageInLRUCache();  //LRU ALGORITHM
                System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
                lru.displayCache();
-               
-               //checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
-               //System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
-               //lrupref.displayCache();
+               System.out.println();
+               checkPageInLRUCacheWithObjectLifeTime(); //LRU-WITH-OBJECT LIFE TIME
+               System.out.println("hit count while using LRU is  "+this.hitCountOfLruTime+" and \nmiss count while using LRU is "+this.missCountOfLruTime);
+               lrutime.displayCache();
+               System.out.println();
+               checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
+               System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
+               lrupref.displayCache();
        
    }
+   
    public void printPageRequestQueue()
    {
         int page;
@@ -124,6 +134,37 @@ public final class Webcaching extends Thread
        }
        
    }
+   
+   public void checkPageInLRUCacheWithObjectLifeTime()
+   {
+       int page;
+       Timestamp time;
+       boolean lrutimevalue;
+       Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
+       try
+       {
+       while(itr.hasNext())
+       {
+       pageRequestEvent=itr.next();
+       page=pageRequestEvent.page;
+       time=pageRequestEvent.time;
+       
+       lrutimevalue=lrutime.checkPage(page, time);
+       if(lrutimevalue)
+               {
+                   hitCountOfLruTime=0; 
+               }
+               else
+               {
+                    missCountOfLruTime=0;
+               }
+        }
+       }catch(Exception e)
+       {
+           System.out.println(e);
+       }       
+   }
+   
    public void checkPageInLRUCachewithPrefetching()
    {
        int page;

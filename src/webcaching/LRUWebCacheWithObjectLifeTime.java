@@ -1,24 +1,22 @@
 
 package webcaching;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.*;
+
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 
-
-public class LRUWebCacheWithPrefetch 
-{       
+public class LRUWebCacheWithObjectLifeTime 
+{
     public LinkedList<LRUObject> list;
     public Map<Integer,LRUObject> map;
-    Prefetch prefetch;
     int cacheSize;    
-    LRUWebCacheWithPrefetch()
+    LRUWebCacheWithObjectLifeTime()
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
-        try
+        /*try
         {
         FileReader file=new FileReader("G:/Java/Webcaching/src/input.txt");
         BufferedReader reader=new BufferedReader(file);
@@ -29,25 +27,14 @@ public class LRUWebCacheWithPrefetch
         }catch(Exception e)
         {
             System.out.println(e);
-        }
+        }*/
+        this.cacheSize=10;
     }
    
     public boolean checkPage(int page,Timestamp time)
     {
-        int predictionPage;
         LRUObject o=new LRUObject(page,time);
         
-       if(list.size()>=(cacheSize/2))
-        {
-        prefetch=new Prefetch(list,map);
-        
-        predictionPage=prefetch.fetchAndStoreNextPage(page);//fetching the prediction page
-        java.util.Date date= new java.util.Date();
-        Timestamp timeForPredictionPage=new Timestamp(date.getTime());
-        
-        o=new LRUObject(predictionPage,timeForPredictionPage);
-        put(o);
-        }
         if(map.containsKey(o.pageId))
         {
             boolean value=list.remove(o);
@@ -69,8 +56,8 @@ public class LRUWebCacheWithPrefetch
             //list.add(o);
             map.put(o.pageId, o);
             updateCache(o);
+            
         }
-        
         else
         {
             deleteCacheEntry();
@@ -96,17 +83,37 @@ public class LRUWebCacheWithPrefetch
     private void updateCache(LRUObject o)
     {
         list.addFirst(o);
-    }
-    public void displayCache()
-    {
-        System.out.println("Elements present in LRU-pref-CACHE are");
-        Iterator<LRUObject> itr=list.iterator();
-        while(itr.hasNext())
-            System.out.print(itr.next().pageId+"\t");
-        System.out.println();
+        
     }
     private int cacheSize()
     {
         return list.size();
     }
+    private void updataCacheBasedOnObjectTime()
+    {
+        java.util.Date date= new java.util.Date();
+        Timestamp currentTime=new Timestamp(date.getTime());
+        
+        long currenttime=currentTime.getTime(); //change current time in to long
+        
+        Iterator<LRUObject> itr=list.iterator();
+        while(itr.hasNext())
+        { 
+            long pageTime=itr.next().time.getTime(); //change page time into long
+            pageTime+=120000;         //2 min
+            if(currenttime>=pageTime) //pagetime > 2min delete it
+            {
+                list.remove(itr.next());
+            }
+        }
+    }
+    
+    public void displayCache()
+    {
+        System.out.println("Elements present in LRU-CACHE are");
+        Iterator<LRUObject> itr=list.iterator();
+        while(itr.hasNext())
+            System.out.print(itr.next().pageId+"\t");
+        System.out.println();
+    }    
 }
