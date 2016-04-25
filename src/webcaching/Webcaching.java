@@ -41,7 +41,7 @@ public final class Webcaching extends Thread
                lru.displayCache();
                System.out.println();
                checkPageInLRUCacheWithObjectLifeTime(); //LRU-WITH-OBJECT LIFE TIME
-               System.out.println("hit count while using LRU is  "+this.hitCountOfLruTime+" and \nmiss count while using LRU is "+this.missCountOfLruTime);
+               System.out.println("hit count while using LRU-with-TIME is  "+this.hitCountOfLruTime+" and \nmiss count while using LRU-with-TIME is "+this.missCountOfLruTime);
                lrutime.displayCache();
                System.out.println();
                checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
@@ -102,8 +102,7 @@ public final class Webcaching extends Thread
        }
        
    }
-   
-   
+  
    public void checkPageInLRUCache()
    {
        int page;
@@ -152,11 +151,11 @@ public final class Webcaching extends Thread
        lrutimevalue=lrutime.checkPage(page, time);
        if(lrutimevalue)
                {
-                   hitCountOfLruTime=0; 
+                   hitCountOfLruTime++; 
                }
                else
                {
-                    missCountOfLruTime=0;
+                    missCountOfLruTime++;
                }
         }
        }catch(Exception e)

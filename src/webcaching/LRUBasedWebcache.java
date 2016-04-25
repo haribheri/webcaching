@@ -13,7 +13,7 @@ public class LRUBasedWebcache {
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
-        /*try
+        try
         {
         FileReader file=new FileReader("G:/Java/Webcaching/src/input.txt");
         BufferedReader reader=new BufferedReader(file);
@@ -24,8 +24,7 @@ public class LRUBasedWebcache {
         }catch(Exception e)
         {
             System.out.println(e);
-        }*/
-        this.cacheSize=10;
+        }
     }
    
     public boolean checkPage(int page,Timestamp time)

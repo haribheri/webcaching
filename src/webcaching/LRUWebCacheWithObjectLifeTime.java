@@ -1,11 +1,8 @@
-
 package webcaching;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
+import java.io.*;
 
 public class LRUWebCacheWithObjectLifeTime 
 {
@@ -16,7 +13,7 @@ public class LRUWebCacheWithObjectLifeTime
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
-        /*try
+        try
         {
         FileReader file=new FileReader("G:/Java/Webcaching/src/input.txt");
         BufferedReader reader=new BufferedReader(file);
@@ -27,12 +24,15 @@ public class LRUWebCacheWithObjectLifeTime
         }catch(Exception e)
         {
             System.out.println(e);
-        }*/
-        this.cacheSize=10;
+        }
+        
     }
    
     public boolean checkPage(int page,Timestamp time)
     {
+        if(list.size()>=cacheSize/3)
+            updataCacheBasedOnObjectTime();
+        
         LRUObject o=new LRUObject(page,time);
         
         if(map.containsKey(o.pageId))
