@@ -2,6 +2,7 @@
 package webcaching;
 
 import java.util.*;
+import java.io.*;
 
 public class Prediction 
 {
@@ -16,14 +17,39 @@ public class Prediction
         int i,j;
         for(i=0;i<trainset.length;i++)
             trainset[i]=a[i];
-        
-        //this.rangeOfPages=client.rangeOfpages;
-        this.rangeOfPages=15;
+        client=new Client();
+        this.rangeOfPages=client.rangeOfpages;
         this.arr=new int[rangeOfPages][];
         for(j=0;j<this.rangeOfPages;j++)
+        {
             arr[j]=new int[rangeOfPages];
-        costructPredictionTable(rangeOfPages);
+        }
+        costruct1stOrderPredictionTable(rangeOfPages);
+        //orderOfPrediction();
 
+    }
+    public void orderOfPrediction()
+    {
+        int ch;
+        System.out.println("Enter value between 1-3 :");
+        System.out.println("1 for 1st order prediction");
+        System.out.println("2 for 2nd order prediction");
+        System.out.println("3 for 3rd order prediction");
+       
+        Scanner sc=new Scanner(System.in);
+        ch=sc.nextInt();
+        switch(ch)
+        {
+            case 1:
+                costruct1stOrderPredictionTable(rangeOfPages);
+                break;
+            case 2:
+                costruct2ndOrderPredictionTable(rangeOfPages);
+                break;
+            case 3:
+                costruct2ndOrderPredictionTable(rangeOfPages);
+                break;
+        }
     }
     public int predict(int page)//called by prefetch
     {
@@ -42,7 +68,7 @@ public class Prediction
         }
         return max;
      }
-    private void costructPredictionTable(int numberOfpages)
+    private void costruct1stOrderPredictionTable(int numberOfpages)
     {
         int i,j,k;
         for(i=0;i<numberOfpages;i++)
@@ -73,5 +99,13 @@ public class Prediction
                 }
             }
         }
-    }        
+    }
+    private void costruct2ndOrderPredictionTable(int numberOfpages)
+    {
+        
+    }
+    private void costruct3rdOrderPredictionTable(int numberOfpages)
+    {
+        
+    }
 }

@@ -49,7 +49,7 @@ public class Main extends Thread
     @Override
     public void run()
     {
-           client = new Client(this.pageRequestEventsQueue);           
+           client = new Client();           
            for(int i=0;i<client.numberOfPages;i++)
            {
             pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
@@ -77,9 +77,6 @@ public class Main extends Thread
         main.initClient("Client-1");
        
         main.join(); //waits main thread until to complete child thread 
-        main.caching();            
-        
-        
-        
+        main.caching();                    
     }
 }

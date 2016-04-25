@@ -7,10 +7,10 @@ public class Client
 {    
     public int numberOfPages, i;
     public int rangeOfpages;
-    Queue<PageRequestEvent> pageRequestEventQueue;
-    public Client(Queue<PageRequestEvent> pageRequestEventQueue)
+    
+    public Client()
     {
-       this.pageRequestEventQueue=pageRequestEventQueue;
+       
        Scanner file=null;
        try
        {

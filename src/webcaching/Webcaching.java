@@ -16,9 +16,7 @@ public final class Webcaching extends Thread
     LRUWebCacheWithPrefetch lrupref;
     
    public Webcaching(Queue<PageRequestEvent> pageRequestEventQueue)
-   {
-       
-       
+   {      
        this.pageRequestEventQueue=pageRequestEventQueue;
        
        this.lru=new LRUBasedWebcache();
@@ -28,7 +26,7 @@ public final class Webcaching extends Thread
        this.lrupref=new LRUWebCacheWithPrefetch();
        
        int ch;
-       System.out.println("Enter value between 1-2 :");
+       System.out.println("Enter value between 1-3 :");
        System.out.println("1 for LRU implementation");
        System.out.println("2 for LFU implementation");
        System.out.println("3 for LFU implementation with prefetching");
@@ -56,7 +54,6 @@ public final class Webcaching extends Thread
      
    public void checkPageInLRUCache()
    {
-       
        int page;
        Timestamp time;
        boolean lruvalue;
@@ -81,15 +78,15 @@ public final class Webcaching extends Thread
    {
        int page;
        Timestamp time;
-       boolean lruvalue;
+       boolean lruprefvalue;
        while(!pageRequestEventQueue.isEmpty())
        {
        pageRequestEvent=pageRequestEventQueue.remove();
        page=pageRequestEvent.page;
        time=pageRequestEvent.time;
        
-       lruvalue=lrupref.checkPage(page, time);
-       if(lruvalue)
+       lruprefvalue=lrupref.checkPage(page, time);
+       if(lruprefvalue)
                {
                    hitCountOfLrupref++;
                }
@@ -103,7 +100,7 @@ public final class Webcaching extends Thread
    {
        int page;
        Timestamp time;
-       boolean lruprefvalue;
+       boolean lfuvalue;
        while(!pageRequestEventQueue.isEmpty())
        {
        pageRequestEvent=pageRequestEventQueue.remove();
@@ -111,8 +108,8 @@ public final class Webcaching extends Thread
        time=pageRequestEvent.time;
        try
        {
-       lruprefvalue=lrupref.checkPage(page, time);
-       if(lruprefvalue)
+       lfuvalue=lfu.checkPage(page, time);
+       if(lfuvalue)
                {
                    hitCountOfLfu++;
                }
