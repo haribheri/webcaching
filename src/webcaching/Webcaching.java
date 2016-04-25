@@ -3,6 +3,7 @@ package webcaching;
 import java.util.*;
 import java.sql.Timestamp;
 import java.io.*;
+
 public final class Webcaching extends Thread 
 {
     int hitCountOfLru=0, missCountOfLru=0;
@@ -12,7 +13,8 @@ public final class Webcaching extends Thread
     PageRequestEvent pageRequestEvent;
     LFUBasedWebCache lfu;
     LRUBasedWebcache lru;
-        
+    LRUWebCacheWithPrefetch lrupref;
+    
    public Webcaching(Queue<PageRequestEvent> pageRequestEventQueue)
    {
        
@@ -22,6 +24,9 @@ public final class Webcaching extends Thread
        this.lru=new LRUBasedWebcache();
        
        this.lfu=new LFUBasedWebCache();
+       
+       this.lrupref=new LRUWebCacheWithPrefetch();
+       
        int ch;
        System.out.println("Enter value between 1-2 :");
        System.out.println("1 for LRU implementation");
@@ -72,13 +77,31 @@ public final class Webcaching extends Thread
    }
    public void checkPageInLRUCachewithPrefetching()
    {
+       int page;
+       Timestamp time;
+       boolean lruvalue;
+       while(!pageRequestEventQueue.isEmpty())
+       {
+       pageRequestEvent=pageRequestEventQueue.remove();
+       page=pageRequestEvent.page;
+       time=pageRequestEvent.time;
        
+       lruvalue=lrupref.checkPage(page, time);
+       if(lruvalue)
+               {
+                   hitCountOfLru++;
+               }
+               else
+               {
+                    missCountOfLru++;
+               }
+        }
    }
    public void checkPageInLFUCache()
    {
        int page;
        Timestamp time;
-       boolean lfuvalue;
+       boolean lruprefvalue;
        while(!pageRequestEventQueue.isEmpty())
        {
        pageRequestEvent=pageRequestEventQueue.remove();
@@ -86,8 +109,8 @@ public final class Webcaching extends Thread
        time=pageRequestEvent.time;
        try
        {
-       lfuvalue=lfu.checkPage(page, time);
-       if(lfuvalue)
+       lruprefvalue=lrupref.checkPage(page, time);
+       if(lruprefvalue)
                {
                    hitCountOfLfu++;
                }

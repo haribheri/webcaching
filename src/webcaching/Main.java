@@ -56,7 +56,7 @@ public class Main extends Thread
             this.pageRequestEventsQueue.add(pageRequestEvent);   
             try
             {
-             Thread.sleep(5000);
+             Thread.sleep(500);
             }
              catch(InterruptedException e)
             {
@@ -72,13 +72,19 @@ public class Main extends Thread
     public static void main(String[] args)throws InterruptedException
     {
         int i;
-        for(i=1;i<=numberOfClients;i++)
+        for(i=1;i<=5;i++)
         {
             Main main=new Main();
             main.initClient("Client -i");
         }
+        Thread mt=Thread.currentThread();
+        
         Main obj=new Main();
-        Thread.sleep(50000);
-        obj.caching();
+        
+        obj.join(); //waits main thread until to complete child thread 
+        obj.caching();            
+        
+        
+        
     }
 }

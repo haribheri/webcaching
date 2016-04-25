@@ -33,11 +33,11 @@ public class LRUWebCacheWithPrefetch
     {
         LRUObject o=new LRUObject(page,time);
         
-       /* if(list.size()>=(cacheSize/2))
+       if(list.size()>=(cacheSize/2))
         {
         prefetch=new Prefetch(list,map);
         prefetch.fetchAndStoreNextPage(page);
-        }*/
+        }
         if(map.containsKey(o.pageId))
         {
             updateCache(o);
