@@ -100,7 +100,7 @@ public class LRUWebCacheWithObjectLifeTime
         while(itr.hasNext())
         { 
             long pageTime=itr.next().time.getTime(); //change page time into long
-            pageTime+=120000;         //2 min
+            pageTime+=30000;         //30 sec
             if(currenttime>=pageTime) //pagetime > 2min delete it
             {
                 list.remove(itr.next());

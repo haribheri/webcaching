@@ -34,20 +34,10 @@ public class LRUWebCacheWithPrefetch
    
     public boolean checkPage(int page,Timestamp time)
     {
-        int predictionPage;
         LRUObject o=new LRUObject(page,time);
         
-       if(list.size()>=(cacheSize/2))
-        {
-        prefetch=new Prefetch(list,map);
+        prefetchPage(page); //prefetching
         
-        predictionPage=prefetch.fetchAndStoreNextPage(page);//fetching the prediction page
-        java.util.Date date= new java.util.Date();
-        Timestamp timeForPredictionPage=new Timestamp(date.getTime());
-        
-        o=new LRUObject(predictionPage,timeForPredictionPage);
-        put(o);
-        }
         if(map.containsKey(o.pageId))
         {
             boolean value=list.remove(o);
@@ -59,6 +49,25 @@ public class LRUWebCacheWithPrefetch
         {
             put(o);
             return false;
+        }
+    }
+    public void prefetchPage(int page)
+    {
+        int predictionPage;
+        LRUObject o;
+        if(list.size()>=(cacheSize/2))
+        {
+        prefetch=new Prefetch(list,map);
+        
+        predictionPage=prefetch.fetchAndStoreNextPage(page);//fetching the prediction page
+        if(predictionPage!=0)
+        {
+        java.util.Date date= new java.util.Date();
+        Timestamp timeForPredictionPage=new Timestamp(date.getTime());
+        
+        o=new LRUObject(predictionPage,timeForPredictionPage);
+        put(o);
+        }
         }
     }
     

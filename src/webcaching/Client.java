@@ -34,6 +34,8 @@ public class Client
        int page;
        Random rand=new Random();
        page=rand.nextInt(rangeOfpages);
+       if(page==0)
+           page+=1;
        return page;
     }
    

@@ -61,7 +61,7 @@ public class Prediction
     private int findMax(int aux[])
     {
         int i,max=aux[0];
-        for(i=1;i<aux.length;i++)
+        for(i=0;i<aux.length;i++)
         {
             if(aux[i]>=max)
                 max=aux[i];
