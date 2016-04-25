@@ -14,17 +14,16 @@ public class Main extends Thread
     public Main()
     {
        this.pageRequestEventsQueue = new LinkedList<PageRequestEvent>(); 
-       Scanner file=null;
        try
-       {
-           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
-       }
-       catch(FileNotFoundException e)
-       {
-           System.out.println("unable to locate file");
-           System.exit(0);      
-       }
-       this.numberOfClients=file.nextInt();
+        {
+        FileReader file=new FileReader("G:/Java/Webcaching/src/input.txt");
+        BufferedReader reader=new BufferedReader(file);
+        String temp=reader.readLine();
+        this.numberOfClients=Integer.parseInt(temp);
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
     
     public void display()

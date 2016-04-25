@@ -11,18 +11,22 @@ public class Client
     public Client()
     {
        
-       Scanner file=null;
+       String temp1,temp2; //dummy values to store string input from files
        try
        {
-           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
-       }
-       catch(FileNotFoundException e)
+       FileReader file=new FileReader("G:/Java/Webcaching/src/input.txt");
+       BufferedReader reader=new BufferedReader(file);
+       for(int i=0;i<1;i++)
+       reader.readLine(); //reads 2rd line
+       temp1=reader.readLine();
+       this.numberOfPages=Integer.parseInt(temp1);
+       temp2=reader.readLine(); //reads 3rd line
+       this.rangeOfpages=Integer.parseInt(temp2);     
+       }catch(Exception e)
        {
-           System.out.println("unable to locate file");
-           System.exit(0);      
+           System.out.println(e);
+           
        }
-       this.numberOfPages=file.nextInt();
-       this.rangeOfpages=file.nextInt();
     }
     
    private int generatePage()

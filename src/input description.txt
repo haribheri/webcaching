@@ -1,0 +1,4 @@
+num of clients
+num of pages
+range of pages
+size of cache

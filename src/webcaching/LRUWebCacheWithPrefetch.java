@@ -1,7 +1,9 @@
 
 package webcaching;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
 import java.sql.Timestamp;
 
@@ -16,17 +18,18 @@ public class LRUWebCacheWithPrefetch
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
-        Scanner file=null;
         try
         {
-           file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));           
-        }
-        catch(FileNotFoundException e)
+        FileReader file=new FileReader("G:/Java/Webcaching/src/input.txt");
+        BufferedReader reader=new BufferedReader(file);
+        for(int i=0;i<3;i++)
+        reader.readLine(); //reads 4th line
+        String temp=reader.readLine();
+        this.cacheSize=Integer.parseInt(temp);
+        }catch(Exception e)
         {
-           System.out.println("unable to locate file");
-           System.exit(0);      
-       }
-        this.cacheSize=file.nextInt(); 
+            System.out.println(e);
+        }
     }
    
     public boolean checkPage(int page,Timestamp time)

@@ -30,12 +30,13 @@ public final class Webcaching extends Thread
                checkPageInLFUCache();  //LFU ALOGORITHM
                System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
                
-               checkPageInLRUCache();  //LRU ALGORITHM
+               /*checkPageInLRUCache();  //LRU ALGORITHM
                System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
                
                checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
                System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
-    }
+    */
+                       }
      
    public void checkPageInLRUCache()
    {
