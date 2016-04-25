@@ -13,7 +13,7 @@ public class LRUBasedWebcache {
     {
         this.list=new LinkedList<LRUObject>();
         this.map=new HashMap<Integer,LRUObject>();
-        try
+        /*try
         {
         FileReader file=new FileReader("G:/Java/Webcaching/src/input.txt");
         BufferedReader reader=new BufferedReader(file);
@@ -24,7 +24,8 @@ public class LRUBasedWebcache {
         }catch(Exception e)
         {
             System.out.println(e);
-        }
+        }*/
+        this.cacheSize=10;
     }
    
     public boolean checkPage(int page,Timestamp time)
@@ -33,7 +34,9 @@ public class LRUBasedWebcache {
         
         if(map.containsKey(o.pageId))
         {
-            updateCache(o);
+            boolean value=list.remove(o);
+            if(value)
+            list.addFirst(o);
             return true;
         }
         else
@@ -47,15 +50,16 @@ public class LRUBasedWebcache {
     {
         if(isCacheAvilable())
         {
-            list.add(o);
+            //list.add(o);
             map.put(o.pageId, o);
             updateCache(o);
+            
         }
-        
         else
         {
             deleteCacheEntry();
-            list.add(o);
+           // list.add(o);
+            updateCache(o);
             map.put(o.pageId,o);
         }
         
@@ -76,9 +80,19 @@ public class LRUBasedWebcache {
     private void updateCache(LRUObject o)
     {
         list.addFirst(o);
+        
     }
     private int cacheSize()
     {
         return list.size();
     }
+    public void displayCache()
+    {
+        System.out.println("Elements present in LRU-CACHE are");
+        Iterator<LRUObject> itr=list.iterator();
+        while(itr.hasNext())
+            System.out.print(itr.next().pageId+"\t");
+        System.out.println();
+    }
+    
 }

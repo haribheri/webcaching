@@ -32,16 +32,23 @@ public class LFUBasedWebCache
         //updataCacheBasedOnObjectTime();
         int flag=0;                     //to check page is in cache
         LFUObject o=new LFUObject(pageId,time) ;
+       try
+       {
         Iterator<LFUObject> itr=list.iterator();
         while(itr.hasNext())
         {
             if(o.pageId==itr.next().pageId)
             {
-               itr.next().count++;
+               (itr.next().count)++;
                 flag=1;
                 break;
             }
         }
+       }
+       catch(Exception e)
+       {
+           System.out.println(e);
+       }
         if(flag==1)
         {
             return true;
@@ -52,6 +59,7 @@ public class LFUBasedWebCache
             return false;
         }        
     }
+    
     private void put(LFUObject o)
     {
         if(isCacheAvilable())
@@ -85,6 +93,16 @@ public class LFUBasedWebCache
        Collections.sort(list, new LFUComparator());
        list.removeLast();
     }
+    
+    public void displayCache()
+    {
+        System.out.println("Elements present in LFU-CACHE are");
+        Iterator<LFUObject> itr=list.iterator();
+        while(itr.hasNext())
+            System.out.print(itr.next().pageId+"\t");
+        System.out.println();
+    }
+    
     private void updataCacheBasedOnObjectTime()
     {
         java.util.Date date= new java.util.Date();

@@ -29,15 +29,71 @@ public final class Webcaching extends Thread
                
                checkPageInLFUCache();  //LFU ALOGORITHM
                System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
+               lfu.displayCache();
                
-               /*checkPageInLRUCache();  //LRU ALGORITHM
+               checkPageInLRUCache();  //LRU ALGORITHM
                System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
+               lru.displayCache();
                
-               checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
-               System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
-    */
-                       }
-     
+               //checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
+               //System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
+               //lrupref.displayCache();
+       
+   }
+   public void printPageRequestQueue()
+   {
+        int page;
+        Timestamp time;
+        Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
+        try
+        {
+            while(itr.hasNext())
+        {
+            pageRequestEvent=itr.next();
+            page=pageRequestEvent.page;
+            time=pageRequestEvent.time;
+            System.out.print(page+"\t");
+            //System.out.println("page is"+ time);
+        }
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        System.out.println();
+   }
+  
+   public void checkPageInLFUCache()
+   {
+       int page;
+       Timestamp time;
+       boolean lfuvalue;
+       try
+       {
+       Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();      
+       while(itr.hasNext())
+       {
+       pageRequestEvent=itr.next();
+       page=pageRequestEvent.page;
+       time=pageRequestEvent.time;
+       
+       lfuvalue=lfu.checkPage(page, time);
+       if(lfuvalue)
+               {
+                   hitCountOfLfu++;
+               }
+               else
+               {
+                    missCountOfLfu++;
+               }             
+       }
+       }catch(Exception e)
+       {
+           System.out.println(e);
+       }
+       
+   }
+   
+   
    public void checkPageInLRUCache()
    {
        int page;
@@ -66,6 +122,7 @@ public final class Webcaching extends Thread
        {
            System.out.println(e);
        }
+       
    }
    public void checkPageInLRUCachewithPrefetching()
    {
@@ -96,55 +153,4 @@ public final class Webcaching extends Thread
            System.out.println(e);
        }
    }
-   public void checkPageInLFUCache()
-   {
-       int page;
-       Timestamp time;
-       boolean lfuvalue;
-       Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
-       try
-       {
-       while(itr.hasNext())
-       {
-       pageRequestEvent=itr.next();
-       page=pageRequestEvent.page;
-       time=pageRequestEvent.time;
-       
-       lfuvalue=lfu.checkPage(page, time);
-       if(lfuvalue)
-               {
-                   hitCountOfLfu++;
-               }
-               else
-               {
-                    missCountOfLfu++;
-               }             
-       }
-       }catch(Exception e)
-       {
-           System.out.println(e);
-       }
-   }
-   
-   public void printPageRequestQueue()
-   {
-        int page;
-        Timestamp time;
-        Iterator<PageRequestEvent> itr=pageRequestEventQueue.iterator();
-        try
-        {
-            while(itr.hasNext())
-        {
-            pageRequestEvent=itr.next();
-            page=pageRequestEvent.page;
-            time=pageRequestEvent.time;
-            System.out.print(page+"\t");
-            //System.out.println("page is"+ time);
-        }
-        }catch(Exception e)
-        {
-            System.out.println(e);
-        }
-        System.out.println();
-   }
-}
+}   

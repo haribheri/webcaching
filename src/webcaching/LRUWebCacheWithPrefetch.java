@@ -34,16 +34,23 @@ public class LRUWebCacheWithPrefetch
    
     public boolean checkPage(int page,Timestamp time)
     {
+        int predicionPage;
         LRUObject o=new LRUObject(page,time);
         
        if(list.size()>=(cacheSize/2))
         {
         prefetch=new Prefetch(list,map);
-        prefetch.fetchAndStoreNextPage(page);
+        predicionPage=prefetch.fetchAndStoreNextPage(page);
+        java.util.Date date= new java.util.Date();
+        Timestamp timeForPredictionPage=new Timestamp(date.getTime());
+        o=new LRUObject(predicionPage,timeForPredictionPage);
+         put(o);
         }
         if(map.containsKey(o.pageId))
         {
-            updateCache(o);
+            boolean value=list.remove(o);
+            if(value)
+            list.addFirst(o);
             return true;
         }
         else
@@ -57,7 +64,7 @@ public class LRUWebCacheWithPrefetch
     {
         if(isCacheAvilable())
         {
-            list.add(o);
+            //list.add(o);
             map.put(o.pageId, o);
             updateCache(o);
         }
@@ -65,7 +72,8 @@ public class LRUWebCacheWithPrefetch
         else
         {
             deleteCacheEntry();
-            list.add(o);
+           // list.add(o);
+            updateCache(o);
             map.put(o.pageId,o);
         }
         
@@ -86,6 +94,14 @@ public class LRUWebCacheWithPrefetch
     private void updateCache(LRUObject o)
     {
         list.addFirst(o);
+    }
+    public void displayCache()
+    {
+        System.out.println("Elements present in LRU-pref-CACHE are");
+        Iterator<LRUObject> itr=list.iterator();
+        while(itr.hasNext())
+            System.out.print(itr.next().pageId+"\t");
+        System.out.println();
     }
     private int cacheSize()
     {
