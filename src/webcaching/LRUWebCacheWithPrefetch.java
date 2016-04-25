@@ -99,7 +99,7 @@ public class LRUWebCacheWithPrefetch
     }
     public void displayCache()
     {
-        System.out.println("Elements present in LRU-pref-CACHE are");
+        System.out.println("Elements present in LRU-with-PREF-CACHE are");
         Iterator<LRUObject> itr=list.iterator();
         while(itr.hasNext())
             System.out.print(itr.next().pageId+"\t");

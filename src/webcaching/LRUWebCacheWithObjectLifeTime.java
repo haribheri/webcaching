@@ -110,7 +110,7 @@ public class LRUWebCacheWithObjectLifeTime
     
     public void displayCache()
     {
-        System.out.println("Elements present in LRU-CACHE are");
+        System.out.println("Elements present in LRU-with-TIME-CACHE are");
         Iterator<LRUObject> itr=list.iterator();
         while(itr.hasNext())
             System.out.print(itr.next().pageId+"\t");
