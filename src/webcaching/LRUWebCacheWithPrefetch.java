@@ -40,9 +40,20 @@ public class LRUWebCacheWithPrefetch
         
         if(map.containsKey(o.pageId))
         {
-            boolean value=list.remove(o);
-            if(value)
+            Iterator<LRUObject> itr=list.iterator();
+            try
+            {
+            while(itr.hasNext())
+            {
+                if(itr.next().pageId==o.pageId)
+                    itr.remove();
+            }
+            }catch(Exception e)
+                {
+                    System.out.println(e);
+                }
             list.addFirst(o);
+            
             return true;
         }
         else
@@ -99,8 +110,9 @@ public class LRUWebCacheWithPrefetch
     
     private void deleteCacheEntry()
     {
-        list.removeLast();
         map.remove(list.getLast().pageId);
+        list.removeLast();
+        
         
     }
     
