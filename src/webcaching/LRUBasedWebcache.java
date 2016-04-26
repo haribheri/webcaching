@@ -70,8 +70,9 @@ public class LRUBasedWebcache {
     
     private void deleteCacheEntry()
     {
-        list.removeLast();
         map.remove(list.getLast().pageId);
+        list.removeLast();
+        
     }
         
     public void displayCache()
