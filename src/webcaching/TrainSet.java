@@ -1,17 +1,31 @@
 
 package webcaching;
 
+import java.io.*;
 import java.util.*;
 
 public class TrainSet 
 {
     LinkedList<LRUObject> list;
     Prediction prediction;
+    int trainsetPages;
     int [] a;
     public TrainSet(LinkedList<LRUObject> list)
     {
+        Scanner file=null;
+        try
+        {
+            file=new Scanner(new FileInputStream("G:\\Java\\Webcaching\\src\\input.txt"));
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        for(int i=0;i<4;i++)
+            file.nextLine();
+        this.trainsetPages=file.nextInt();
+        
         this.list=list;
-        this.a=new int[10];        
+        this.a=new int[this.trainsetPages];        
         constructTrainSet();
     }
     
@@ -19,7 +33,7 @@ public class TrainSet
     {        
         int i=0;
         Iterator<LRUObject> itr=list.iterator();
-        while(itr.hasNext()&&i<10)
+        while(itr.hasNext()&&i<this.trainsetPages)
         {
          a[i]=itr.next().getPage();
          i++;

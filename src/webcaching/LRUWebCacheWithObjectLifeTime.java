@@ -30,8 +30,8 @@ public class LRUWebCacheWithObjectLifeTime
    
     public boolean checkPage(int page,Timestamp time)
     {
-        if(list.size()>=cacheSize/3)
-            updataCacheBasedOnObjectTime();
+        //if(list.size()>=cacheSize/3)
+          //  updataCacheBasedOnObjectTime();
         
         LRUObject o=new LRUObject(page,time);
         
@@ -49,20 +49,17 @@ public class LRUWebCacheWithObjectLifeTime
         }
     }
     
-    public void put(LRUObject o)
+    private void put(LRUObject o)
     {
         if(isCacheAvilable())
         {
-            //list.add(o);
+            list.addFirst(o);
             map.put(o.pageId, o);
-            updateCache(o);
-            
         }
         else
         {
             deleteCacheEntry();
-           // list.add(o);
-            updateCache(o);
+            list.addFirst(o);
             map.put(o.pageId,o);
         }
         
@@ -80,15 +77,7 @@ public class LRUWebCacheWithObjectLifeTime
         list.removeLast();
         map.remove(list.getLast().pageId);
     }
-    private void updateCache(LRUObject o)
-    {
-        list.addFirst(o);
-        
-    }
-    private int cacheSize()
-    {
-        return list.size();
-    }
+    
     private void updataCacheBasedOnObjectTime()
     {
         java.util.Date date= new java.util.Date();
@@ -101,7 +90,7 @@ public class LRUWebCacheWithObjectLifeTime
         { 
             long pageTime=itr.next().time.getTime(); //change page time into long
             pageTime+=30000;         //30 sec
-            if(currenttime>=pageTime) //pagetime > 2min delete it
+            if(currenttime>=pageTime) //pagetime > 2min from the creation, delete it
             {
                 list.remove(itr.next());
             }
@@ -110,10 +99,16 @@ public class LRUWebCacheWithObjectLifeTime
     
     public void displayCache()
     {
+        System.out.println("Size of Cache is: \t"+cacheSize());
         System.out.println("Elements present in LRU-with-TIME-CACHE are");
         Iterator<LRUObject> itr=list.iterator();
         while(itr.hasNext())
             System.out.print(itr.next().pageId+"\t");
         System.out.println();
-    }    
+    }
+    
+    private int cacheSize()
+    {
+        return list.size();
+    }
 }

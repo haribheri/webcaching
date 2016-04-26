@@ -49,23 +49,20 @@ public class LRUBasedWebcache {
     {
         if(isCacheAvilable())
         {
-            //list.add(o);
-            map.put(o.pageId, o);
-            updateCache(o);
-            
+            list.addFirst(o);
+            map.put(o.pageId, o);           
         }
         else
         {
             deleteCacheEntry();
-           // list.add(o);
-            updateCache(o);
+            list.addFirst(o);
             map.put(o.pageId,o);
         }
         
     }
     private boolean isCacheAvilable()
     {
-        if(list.size()>=cacheSize)
+        if(list.size()>=this.cacheSize)
             return false;
         else
             return true;
@@ -76,22 +73,18 @@ public class LRUBasedWebcache {
         list.removeLast();
         map.remove(list.getLast().pageId);
     }
-    private void updateCache(LRUObject o)
-    {
-        list.addFirst(o);
         
-    }
-    private int cacheSize()
-    {
-        return list.size();
-    }
     public void displayCache()
     {
+        System.out.println("Size of Cache is: \t"+cacheSize());
         System.out.println("Elements present in LRU-CACHE are");
         Iterator<LRUObject> itr=list.iterator();
         while(itr.hasNext())
             System.out.print(itr.next().pageId+"\t");
         System.out.println();
     }
-    
+    private int cacheSize()
+    {
+        return list.size();
+    }
 }

@@ -55,7 +55,7 @@ public class Main extends Thread
             this.pageRequestEventsQueue.add(pageRequestEvent);   
             try
             {
-             Thread.sleep(5000);
+             Thread.sleep(500);
             }
              catch(InterruptedException e)
             {

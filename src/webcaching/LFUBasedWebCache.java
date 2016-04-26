@@ -96,6 +96,7 @@ public class LFUBasedWebCache
     
     public void displayCache()
     {
+        System.out.println("Size of Cache is: \t"+list.size());
         System.out.println("Elements present in LFU-CACHE are");
         Iterator<LFUObject> itr=list.iterator();
         while(itr.hasNext())
