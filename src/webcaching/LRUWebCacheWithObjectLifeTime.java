@@ -74,8 +74,9 @@ public class LRUWebCacheWithObjectLifeTime
     
     private void deleteCacheEntry()
     {
-        list.removeLast();
         map.remove(list.getLast().pageId);
+        list.removeLast();
+        
     }
     
     private void updataCacheBasedOnObjectTime()

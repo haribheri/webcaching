@@ -77,7 +77,7 @@ public class LRUWebCacheWithPrefetch
         
         o=new LRUObject(predictionPage,timeForPredictionPage);
         
-        if((!map.containsKey(o))&&(o.pageId!=0))
+        if((!map.containsKey(o.pageId))&&(o.pageId!=0))
         {
         put(o);
         }
