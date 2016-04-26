@@ -41,8 +41,9 @@ public class LRUWebCacheWithPrefetch
         if(map.containsKey(o.pageId))
         {
             boolean value=list.remove(o);
-            if(value)
+            
             list.addFirst(o);
+            
             return true;
         }
         else
@@ -60,12 +61,14 @@ public class LRUWebCacheWithPrefetch
         prefetch=new Prefetch(list,map);
         
         predictionPage=prefetch.fetchAndStoreNextPage(page);//fetching the prediction page
-        if(predictionPage!=0)
-        {
+        
         java.util.Date date= new java.util.Date();
         Timestamp timeForPredictionPage=new Timestamp(date.getTime());
         
         o=new LRUObject(predictionPage,timeForPredictionPage);
+        
+        if((!map.containsKey(o))&&(o.pageId!=0))
+        {
         put(o);
         }
         }
@@ -75,16 +78,14 @@ public class LRUWebCacheWithPrefetch
     {
         if(isCacheAvilable())
         {
-            //list.add(o);
+            list.addFirst(o);
             map.put(o.pageId, o);
-            updateCache(o);
         }
         
         else
         {
             deleteCacheEntry();
-           // list.add(o);
-            updateCache(o);
+            list.addFirst(o);
             map.put(o.pageId,o);
         }
         
@@ -101,13 +102,12 @@ public class LRUWebCacheWithPrefetch
     {
         list.removeLast();
         map.remove(list.getLast().pageId);
+        
     }
-    private void updateCache(LRUObject o)
-    {
-        list.addFirst(o);
-    }
+    
     public void displayCache()
     {
+        System.out.println("Size of Cache is: \t"+cacheSize());
         System.out.println("Elements present in LRU-with-PREF-CACHE are");
         Iterator<LRUObject> itr=list.iterator();
         while(itr.hasNext())
