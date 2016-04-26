@@ -41,9 +41,8 @@ public class LRUWebCacheWithPrefetch
         if(map.containsKey(o.pageId))
         {
             boolean value=list.remove(o);
-            
+            if(value)
             list.addFirst(o);
-            
             return true;
         }
         else
@@ -92,7 +91,7 @@ public class LRUWebCacheWithPrefetch
     }
     private boolean isCacheAvilable()
     {
-        if(list.size()>=cacheSize)
+        if(list.size()>=this.cacheSize)
             return false;
         else
             return true;
