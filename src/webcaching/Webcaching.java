@@ -22,16 +22,16 @@ public final class Webcaching extends Thread
    {      
        this.pageRequestEventQueue=pageRequestEventQueue;
        
-       //this.lru=new LRUBasedWebcache();
+       this.lru=new LRUBasedWebcache();
        
-       //this.lfu=new LFUBasedWebCache();
+       this.lfu=new LFUBasedWebCache();
        
-       //this.lrutime=new LRUWebCacheWithObjectLifeTime();
+       this.lrutime=new LRUWebCacheWithObjectLifeTime();
        
        this.lrupref=new LRUWebCacheWithPrefetch();
        
                printPageRequestQueue(); //print requested pages
-         /*      System.out.println();
+               System.out.println();
                checkPageInLFUCache();  //LFU ALOGORITHM
                System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
                lfu.displayCache();
@@ -44,9 +44,10 @@ public final class Webcaching extends Thread
                System.out.println("hit count while using LRU-with-TIME is  "+this.hitCountOfLruTime+" and \nmiss count while using LRU-with-TIME is "+this.missCountOfLruTime);
                lrutime.displayCache();
                System.out.println();
-           */    checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
+               checkPageInLRUCachewithPrefetching(); //LRU WITH PREFETCHING
                System.out.println("hit count while using LRU with prefetching is  "+this.hitCountOfLrupref +" and \nmiss count while using LRU with prefetching is "+this.missCountOfLrupref);
                lrupref.displayCache();
+               lrupref.displayPrefCache();
        
    }
    

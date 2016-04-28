@@ -1,4 +1,6 @@
-num of clients
-num of pages
+number of clients
+number of pages
 range of pages
 size of cache
+Train set size(must be less than cache size)
+prefetch cache size

@@ -30,15 +30,25 @@ public class LRUWebCacheWithObjectLifeTime
    
     public boolean checkPage(int page,Timestamp time)
     {
-        //if(list.size()>=cacheSize/3)
-          //  updataCacheBasedOnObjectTime();
+        if(list.size()>=cacheSize/4)
+            updataCacheBasedOnObjectTime();
         
         LRUObject o=new LRUObject(page,time);
         
         if(map.containsKey(o.pageId))
         {
-            boolean value=list.remove(o);
-            if(value)
+            Iterator<LRUObject> itr=list.iterator();
+            try
+            {
+            while(itr.hasNext())
+            {
+                if(itr.next().pageId==o.pageId)
+                    itr.remove();
+            }
+            }catch(Exception e)
+                {
+                    System.out.println(e);
+                }
             list.addFirst(o);
             return true;
         }
@@ -90,7 +100,7 @@ public class LRUWebCacheWithObjectLifeTime
         while(itr.hasNext())
         { 
             long pageTime=itr.next().time.getTime(); //change page time into long
-            pageTime+=30000;         //30 sec
+            pageTime+=600000;         //60 sec
             if(currenttime>=pageTime) //pagetime > 2min from the creation, delete it
             {
                 list.remove(itr.next());

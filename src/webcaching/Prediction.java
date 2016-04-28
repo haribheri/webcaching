@@ -66,9 +66,13 @@ public class Prediction
     }
     public int predict(int page)//called by prefetch
     {
-        int i,max_prob_page;
+        int i,max_prob_page,max_value;
         
-        max_prob_page=findMax(arr[page]);
+        max_value=findMax(arr[page]); //finding maximum value of array -> arr[i]
+        for(i=0;i<arr[page].length;i++)
+            if(arr[page][i]==max_value)//corresponding j value for maximum value
+                break;
+        max_prob_page=i;
         return max_prob_page;
     }
     private int findMax(int aux[])
@@ -81,27 +85,26 @@ public class Prediction
         }
         return max;
      }
-    private void costruct1stOrderPredictionTable(int numberOfpages)
+    private void costruct1stOrderPredictionTable(int rangeOfpages)
     {
         int i,j,k;
-        for(i=0;i<numberOfpages;i++)
+        for(i=0;i<rangeOfpages;i++)
         {
-            for(j=0;j<numberOfpages;j++)
+            for(j=0;j<rangeOfpages;j++)
             {
                 arr[i][j]=0;
             }
         }
-        for(i=0;i<numberOfpages;i++)
+        for(i=0;i<rangeOfpages;i++)
         {
-            for(j=0;j<numberOfpages;j++)
-            {
-                if(i!=j)
-                {
                     for(k=0;k<trainset.length-1;k++)
                     {
                         if(trainset[k]==i)
                         {
-                            arr[i][trainset[k+1]]++;                            
+                            if(trainset[k]!=trainset[k+1])
+                            {
+                            arr[i][trainset[k+1]]++;
+                            }
                         }                                                             
                         else
                         {
@@ -109,8 +112,6 @@ public class Prediction
                         }
                                 
                     }
-                }
-            }
         }
     }
     private void costruct2ndOrderPredictionTable(int numberOfpages)
