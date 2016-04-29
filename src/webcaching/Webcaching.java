@@ -22,7 +22,7 @@ public final class Webcaching extends Thread
    {      
        this.pageRequestEventQueue=pageRequestEventQueue;
        
-       this.lru=new LRUBasedWebcache();
+      // this.lru=new LRUBasedWebcache();
        
        this.lfu=new LFUBasedWebCache();
        
@@ -33,13 +33,13 @@ public final class Webcaching extends Thread
                printPageRequestQueue(); //print requested pages
                System.out.println();
                checkPageInLFUCache();  //LFU ALOGORITHM
-               System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
-               lfu.displayCache();
+              System.out.println("hit count while using LFU is  "+this.hitCountOfLfu+" and \nmiss count while using LFU is "+this.missCountOfLfu);
+              lfu.displayCache();
                System.out.println();
-               checkPageInLRUCache();  //LRU ALGORITHM
-               System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
-               lru.displayCache();
-               System.out.println();
+        //      checkPageInLRUCache();  //LRU ALGORITHM
+          //    System.out.println("hit count while using LRU is  "+this.hitCountOfLru+" and \nmiss count while using LRU is "+this.missCountOfLru);
+            //  lru.displayCache();
+             System.out.println();
                checkPageInLRUCacheWithObjectLifeTime(); //LRU-WITH-OBJECT LIFE TIME
                System.out.println("hit count while using LRU-with-TIME is  "+this.hitCountOfLruTime+" and \nmiss count while using LRU-with-TIME is "+this.missCountOfLruTime);
                lrutime.displayCache();
@@ -64,7 +64,7 @@ public final class Webcaching extends Thread
             page=pageRequestEvent.page;
             time=pageRequestEvent.time;
             System.out.print(page+"\t");
-            //System.out.println("page is"+ time);
+            System.out.println("corresponding time  "+ time);
         }
         }catch(Exception e)
         {
@@ -194,4 +194,4 @@ public final class Webcaching extends Thread
            System.out.println(e);
        }
    }
-}   
+}

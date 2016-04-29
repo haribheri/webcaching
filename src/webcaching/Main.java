@@ -53,9 +53,9 @@ public class Main extends Thread
            {
             pageRequestEvent=new PageRequestEvent(client.sendPageRequest(),client.timestampForCurrentPage());
             this.pageRequestEventsQueue.add(pageRequestEvent);   
-            try
+           try
             {
-             Thread.sleep(3000);
+             Thread.sleep(2000);
             }
              catch(InterruptedException e)
             {
@@ -66,16 +66,17 @@ public class Main extends Thread
     private void initClient(String name)
     {
         this.setName("name");
-        this.start();  
+        this.start();
     }
     public static void main(String[] args)throws InterruptedException
     {
         
-        Main main=new Main();
+        Main obj1=new Main();
                 
-        main.initClient("Client-1");
-       
-        main.join(); //waits main thread until to complete child thread 
-        main.caching();                    
+     obj1.initClient("Client-1");
+        
+      
+        obj1.join(); //waits main thread until to complete child thread 
+        obj1.caching();                    
     }
 }

@@ -32,7 +32,9 @@ public class TrainSet
     public final void constructTrainSet()
     {        
         int i=0;
-        Iterator<LRUObject> itr=list.iterator();
+        LinkedList<LRUObject> newlist=(LinkedList<LRUObject>)list.clone();
+        Collections.reverse(newlist);
+        Iterator<LRUObject> itr=newlist.iterator();
         while(itr.hasNext()&&i<this.trainsetPages)
         {
          a[i]=itr.next().getPage();

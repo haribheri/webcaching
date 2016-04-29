@@ -41,8 +41,8 @@ public class LRUWebCacheWithPrefetch
         BufferedReader reader=new BufferedReader(file);
         for(int i=0;i<5;i++)
         reader.readLine(); //reads 4th line
-        String temp=reader.readLine();
-        this.prefCacheSize=Integer.parseInt(temp);
+        String temp1=reader.readLine();
+        this.prefCacheSize=Integer.parseInt(temp1);
         }catch(Exception e)
         {
             System.out.println(e);
@@ -53,16 +53,16 @@ public class LRUWebCacheWithPrefetch
     {
         LRUObject o=new LRUObject(page,time);
         
-        prefetchPage(page); //prefetching
+         prefetchPage(page); //prefetching
         
         if(map.containsKey(o.pageId))
         {
-            this.updataCache(o);            
+            updateCache(o);            
             return true;
         }
-        else if(chackPageInPrefetchCache(o))
+        if(chackPageInPrefetchCache(o))
         {
-            this.updatePrefCache(o);
+            updatePrefCache(o);
             return true;
         }
         else
@@ -71,7 +71,7 @@ public class LRUWebCacheWithPrefetch
             return false;
         }
     }
-    public boolean chackPageInPrefetchCache(LRUObject o)
+    private boolean chackPageInPrefetchCache(LRUObject o)
     {
         if(prefmap.containsKey(o.pageId))
         {
@@ -81,7 +81,7 @@ public class LRUWebCacheWithPrefetch
         else
             return false;
     }
-    public void updataCache(LRUObject o)
+    private void updateCache(LRUObject o)
     {
         Iterator<LRUObject> itr=list.iterator();
             try
@@ -97,7 +97,7 @@ public class LRUWebCacheWithPrefetch
                 }
             list.addFirst(o);
     }
-    public void updatePrefCache(LRUObject o)
+    private void updatePrefCache(LRUObject o)
     {
         Iterator<LRUObject> itr=preflist.iterator();
             try
@@ -113,7 +113,7 @@ public class LRUWebCacheWithPrefetch
                 }
             preflist.addFirst(o);
     }
-    public void prefetchPage(int page)
+    private void prefetchPage(int page)
     {
         int predictionPage;
         LRUObject o;
@@ -128,7 +128,7 @@ public class LRUWebCacheWithPrefetch
         
         o=new LRUObject(predictionPage,timeForPredictionPage);
         
-        if((!prefmap.containsKey(o.pageId))&&(!map.containsKey(o.pageId)))
+        if((!prefmap.containsKey(o.pageId)))
         {
         prefPut(o);
         }
@@ -136,7 +136,7 @@ public class LRUWebCacheWithPrefetch
         
     }
     
-    public void put(LRUObject o)
+    private void put(LRUObject o)
     {
         if(isCacheAvilable())
         {
@@ -152,7 +152,7 @@ public class LRUWebCacheWithPrefetch
         }
         
     }
-    public void prefPut(LRUObject o)
+    private void prefPut(LRUObject o)
     {
         if(isPrefCacheAvilable())
         {
@@ -182,17 +182,18 @@ public class LRUWebCacheWithPrefetch
         else
             return true;
     }
-    private void prefDeleteCacheEntry()
-    {
-        prefmap.remove(preflist.getLast().pageId);
-        preflist.removeLast();  
-    }
+    
     private void deleteCacheEntry()
     {
         map.remove(list.getLast().pageId);
         list.removeLast();
     }
     
+    private void prefDeleteCacheEntry()
+    {
+        prefmap.remove(this.preflist.getLast().pageId);
+        preflist.removeLast();  
+    }
     public void displayCache()
     {
         System.out.println("Size of Cache is: \t"+cacheSize());
@@ -204,9 +205,9 @@ public class LRUWebCacheWithPrefetch
     }
     public void displayPrefCache()
     {
-        System.out.println("Size of Cache is: \t"+prefCacheSize());
+        System.out.println("Size of prefetch Cache is: \t"+prefCacheSize());
         System.out.println("Elements present in PREFETCHING-CACHE are");
-        Iterator<LRUObject> itr=preflist.iterator();
+        Iterator<LRUObject> itr=this.preflist.iterator();
         while(itr.hasNext())
             System.out.print(itr.next().pageId+"\t");
         System.out.println();
@@ -217,6 +218,6 @@ public class LRUWebCacheWithPrefetch
     }
     private int prefCacheSize()
     {
-        return list.size();
+        return preflist.size();
     }
 }

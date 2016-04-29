@@ -30,6 +30,7 @@ public class Prediction
         int i,j;
         for(i=0;i<trainset.length;i++)
             trainset[i]=a[i];
+    
         client=new Client();
         this.rangeOfPages=client.rangeOfpages;
         this.arr=new int[rangeOfPages][];
@@ -101,7 +102,11 @@ public class Prediction
                     {
                         if(trainset[k]==i)
                         {
-                            if(trainset[k]!=trainset[k+1])
+                            if((trainset[k]==0)&&(trainset[k+1]==0))
+                            {
+                                continue;                                
+                            }
+                            else
                             {
                             arr[i][trainset[k+1]]++;
                             }

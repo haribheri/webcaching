@@ -30,13 +30,11 @@ public class LRUWebCacheWithObjectLifeTime
    
     public boolean checkPage(int page,Timestamp time)
     {
-        if(list.size()>=cacheSize/4)
-            updataCacheBasedOnObjectTime();
+                 
+         LRUObject o=new LRUObject(page,time);
         
-        LRUObject o=new LRUObject(page,time);
-        
-        if(map.containsKey(o.pageId))
-        {
+        if((map.containsKey(o.pageId))&&isValid(o))
+        {  
             Iterator<LRUObject> itr=list.iterator();
             try
             {
@@ -49,8 +47,10 @@ public class LRUWebCacheWithObjectLifeTime
                 {
                     System.out.println(e);
                 }
+            
             list.addFirst(o);
             return true;
+            
         }
         else
         {
@@ -71,6 +71,37 @@ public class LRUWebCacheWithObjectLifeTime
             deleteCacheEntry();
             list.addFirst(o);
             map.put(o.pageId,o);
+        }
+        
+    }
+    private boolean isValid(LRUObject o)
+    {
+        java.util.Date date= new java.util.Date();
+        Timestamp currentTime=new Timestamp(date.getTime());
+        
+        long currenttime=currentTime.getTime(); //change current time in to long
+        
+        long pageTime=o.time.getTime();
+        pageTime+=120000;                  //20 sec->lifetime
+        if(pageTime>=currenttime)
+        {
+            return true;            
+        }
+        else
+        {
+            Iterator<LRUObject> itr=list.iterator();
+            try
+            {
+            while(itr.hasNext())
+            {
+                if(itr.next().pageId==o.pageId)
+                    itr.remove();
+            }
+            }catch(Exception e)
+                {
+                    System.out.println(e);
+                }
+            return false;
         }
         
     }
@@ -100,7 +131,7 @@ public class LRUWebCacheWithObjectLifeTime
         while(itr.hasNext())
         { 
             long pageTime=itr.next().time.getTime(); //change page time into long
-            pageTime+=600000;         //60 sec
+            pageTime+=20000;         //60 sec
             if(currenttime>=pageTime) //pagetime > 2min from the creation, delete it
             {
                 list.remove(itr.next());
