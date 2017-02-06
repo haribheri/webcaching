@@ -119,8 +119,33 @@ public class Prediction
                     }
         }
     }
-    private void costruct2ndOrderPredictionTable(int numberOfpages)
+   /* class Order2Node
     {
+	public:
+		int i,j;
+	Order2Node(int i,int j)
+	{
+		this.i=i;
+		this.j=j;
+	}
+    }
+    */
+    private void costruct2ndOrderPredictionTable(int rangeOfpages)
+    {
+        /*
+	int i,j,k;
+	Order2Node 2ndord;
+	int index=(rangeOfpages*(rangeOfpages-1))/2;
+	2ndord arr[index];
+	for(i=0;i<index;i++)
+	{
+		for(j=0;j<index;j++)
+		{
+			arr.i.j=0;
+			arr.j.i=0;	
+		}
+	}
+        */
         
     }
     private void costruct3rdOrderPredictionTable(int numberOfpages)
