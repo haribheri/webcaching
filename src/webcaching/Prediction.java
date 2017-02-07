@@ -148,8 +148,23 @@ public class Prediction
         */
         
     }
-    private void costruct3rdOrderPredictionTable(int numberOfpages)
+    class Order3Node
+	{
+		public:
+		int i,j,k;
+		Order3Node(int i,int j, int k)
+{
+	this.i=i;
+this.j=j;
+this.k=k;
+}
+	}
+    private void costruct3rdOrderPredictionTable(int rangeOfpages)
     {
-        
+        int i,j,k;
+	System.out.println("OrderOfpages");
+	Order3Node 3rdord;
+int index=fact(rangeOfpages)/fact(OrderOfpages);
+int arr[index][index-1][index-2];
     }
 }
